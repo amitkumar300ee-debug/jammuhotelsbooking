@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>J&K Tours — Hotel Rooms</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pri:#1a6b5a;--pri2:#14574a;--pri-light:#e8f5f2;
+  --acc:#f97316;--acc-pale:#fff4ed;
+  --dark:#0f1923;--dark2:#1e2d3d;
+  --txt:#1a2332;--txt2:#4a5568;--txt3:#718096;
+  --bg:#f7f9fc;--white:#fff;--border:#e2e8f0;--border2:#f0f4f8;
+  --green:#059669;--red:#dc2626;--gold:#d4a017;
+  --sh:0 1px 3px rgba(0,0,0,.08);--shm:0 4px 16px rgba(0,0,0,.12);--shl:0 16px 48px rgba(0,0,0,.18);
+  --r:12px;--rs:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font-family:'Inter',sans-serif;cursor:pointer}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--pri);border-radius:2px}
+
+/* ════════════════════════════════════
+   HEADER
+════════════════════════════════════ */
+.header{background:var(--dark);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ico{width:36px;height:36px;background:linear-gradient(135deg,var(--pri),var(--acc));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.logo-txt{color:#fff;font-size:1rem;font-weight:700;line-height:1}
+.logo-sub{color:rgba(255,255,255,.4);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.nav{display:flex;gap:2px}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.55);padding:8px 14px;border-radius:var(--rs);font-size:.82rem;font-weight:500;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-btn.on{background:var(--pri);color:#fff;font-weight:600}
+.hdr-wa{background:#25D366;color:#fff;border:none;padding:8px 16px;border-radius:var(--rs);font-size:.8rem;font-weight:700;display:flex;align-items:center;gap:6px;transition:all .2s;flex-shrink:0}
+.hdr-wa:hover{background:#1fbb5c}
+/* hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px}
+.hamburger span{width:22px;height:2px;background:rgba(255,255,255,.8);border-radius:2px;transition:all .3s;display:block}
+/* mobile menu */
+.mob-menu{display:none;background:var(--dark2);border-top:1px solid rgba(255,255,255,.08);padding:12px 20px;flex-direction:column;gap:4px}
+.mob-menu.open{display:flex}
+.mob-nav-btn{background:none;border:none;color:rgba(255,255,255,.65);padding:10px 14px;border-radius:var(--rs);font-size:.88rem;font-weight:500;text-align:left;transition:all .2s;width:100%}
+.mob-nav-btn:hover,.mob-nav-btn.on{background:var(--pri);color:#fff}
+
+/* ════════════════════════════════════
+   HERO
+════════════════════════════════════ */
+.hero{background:linear-gradient(160deg,var(--dark) 0%,#1a3a2e 50%,var(--dark) 100%);padding:48px 20px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60') center/cover;opacity:.12}
+.hero-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:#fca16a;padding:5px 14px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(1.7rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:12px}
+.hero h1 span{color:#fca16a}
+.hero-sub{color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.7;margin-bottom:32px;font-weight:300}
+
+/* LOCATION PILLS */
+.loc-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px}
+.loc-pill{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);padding:9px 18px;border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:6px}
+.loc-pill:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.25)}
+.loc-pill.on{background:var(--pri);border-color:var(--pri);color:#fff;box-shadow:0 4px 14px rgba(26,107,90,.5)}
+
+/* SEARCH BAR */
+.search-bar{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.sb-f{flex:1;min-width:140px}
+.sb-f label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:5px}
+.sb-inp{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--rs);padding:9px 12px;font-family:'Inter',sans-serif;font-size:.85rem;color:#fff;outline:none;transition:border-color .2s}
+.sb-inp:focus{border-color:var(--pri)}
+.sb-inp option{background:var(--dark2);color:#fff}
+.sb-go{background:var(--pri);color:#fff;border:none;border-radius:var(--rs);padding:9px 22px;font-size:.85rem;font-weight:700;white-space:nowrap;transition:all .2s;height:39px}
+.sb-go:hover{background:var(--pri2);transform:translateY(-1px)}
+
+/* ════════════════════════════════════
+   PAGE SECTIONS
+════════════════════════════════════ */
+.page{display:none;max-width:1280px;margin:0 auto;padding:28px 20px 60px}
+.page.on{display:block}
+
+/* section head */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
+.sec-hd-l .ey{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pri);margin-bottom:4px}
+.sec-hd-l h2{font-size:1.4rem;font-weight:800;color:var(--txt)}
+.sec-hd-l h2 span{color:var(--acc)}
+.count-badge{background:var(--pri-light);color:var(--pri);padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:700}
+
+/* LOCATION SECTION TABS */
+.loc-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:24px;-webkit-overflow-scrolling:touch}
+.loc-tabs::-webkit-scrollbar{height:0}
+.lt{background:var(--white);border:1.5px solid var(--border);color:var(--txt2);padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.lt:hover{border-color:var(--pri);color:var(--pri)}
+.lt.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.lt .lc{background:rgba(255,255,255,.25);color:#fff;padding:1px 7px;border-radius:50px;font-size:.62rem;font-weight:700}
+.lt:not(.on) .lc{background:var(--pri-light);color:var(--pri)}
+
+/* ════════════════════════════════════
+   ROOM CARDS
+════════════════════════════════════ */
+.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+
+.room-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;cursor:pointer;transition:all .3s;box-shadow:var(--sh)}
+.room-card:hover{transform:translateY(-4px);box-shadow:var(--shm);border-color:rgba(26,107,90,.25)}
+.room-card:active{transform:translateY(-2px)}
+
+/* image */
+.rc-img{height:200px;position:relative;overflow:hidden;background:#ddd}
+.rc-img-slides{display:flex;height:100%;transition:transform .4s cubic-bezier(.25,.8,.25,1)}
+.rc-img-slide{min-width:100%;height:100%;flex-shrink:0;position:relative;background:linear-gradient(135deg,#c9d6e3,#a8c4b8)}
+.rc-img-slide img{width:100%;height:100%}
+.rc-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f5f2,#d0e8e3);color:var(--pri);gap:8px}
+.rc-img-placeholder .pi-icon{font-size:2.5rem;opacity:.5}
+.rc-img-placeholder .pi-txt{font-size:.72rem;font-weight:600;opacity:.6;text-align:center}
+.rc-img-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:28px;height:28px;border-radius:50%;font-size:.85rem;z-index:3;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
+.room-card:hover .rc-img-arr{opacity:1}
+.rc-img-arr:hover{background:var(--pri)}
+.rc-arr-l{left:8px}.rc-arr-r{right:8px}
+.rc-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:3}
+.rc-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);border:none;padding:0;cursor:pointer;transition:all .2s}
+.rc-dot.on{background:#fff;width:14px;border-radius:3px}
+/* badges on image */
+.rc-top-badges{position:absolute;top:10px;left:10px;z-index:3;display:flex;flex-direction:column;gap:4px}
+.rc-badge{padding:3px 10px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.rc-badge.loc{background:var(--dark);color:#fff;display:flex;align-items:center;gap:4px}
+.rc-badge.type{background:var(--acc);color:#fff}
+.rc-badge.deal{background:var(--green);color:#fff}
+.rc-like{position:absolute;top:10px;right:10px;z-index:3;background:rgba(255,255,255,.85);border:none;width:30px;height:30px;border-radius:50%;font-size:.88rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.rc-like:hover{transform:scale(1.1);background:#fff}
+.rc-like.on{background:var(--acc-pale)}
+/* img count */
+.rc-img-count{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;padding:3px 8px;border-radius:5px;font-size:.65rem;font-weight:700;z-index:3}
+
+/* body */
+.rc-body{padding:14px}
+.rc-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.rc-type{font-size:.95rem;font-weight:700;color:var(--txt)}
+.rc-rating{display:flex;align-items:center;gap:4px;background:var(--pri-light);color:var(--pri);padding:3px 8px;border-radius:5px;font-size:.72rem;font-weight:700;flex-shrink:0}
+.rc-cap{font-size:.75rem;color:var(--txt3);margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.rc-cap .cap-pill{background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:600;color:var(--txt2)}
+/* amenity tags */
+.rc-ams{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.rc-am{background:var(--bg);border:1px solid var(--border);padding:3px 8px;border-radius:5px;font-size:.68rem;font-weight:600;color:var(--txt2)}
+/* highlights */
+.rc-hi{background:var(--pri-light);border-radius:var(--rs);padding:7px 10px;margin-bottom:10px;display:flex;flex-direction:column;gap:3px}
+.rc-hi span{font-size:.71rem;color:var(--pri);font-weight:600;display:flex;align-items:center;gap:5px}
+.rc-hi span::before{content:'✓';font-weight:900}
+/* price & action */
+.rc-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px;border-top:1px solid var(--border2)}
+.rc-price{}
+.rc-from{font-size:.62rem;color:var(--txt3);margin-bottom:1px}
+.rc-amt{font-size:1.35rem;font-weight:800;color:var(--txt);line-height:1}
+.rc-amt .sym{font-size:.75rem;vertical-align:super;font-weight:600;color:var(--txt3)}
+.rc-per{font-size:.62rem;color:var(--txt3)}
+.rc-extra{font-size:.62rem;color:var(--acc);font-weight:700;margin-top:1px}
+.rc-btns{display:flex;flex-direction:column;gap:5px}
+.rc-view-btn{background:var(--pri);color:#fff;border:none;border-radius:var(--rs);padding:8px 16px;font-size:.78rem;font-weight:700;transition:all .2s;white-space:nowrap}
+.rc-view-btn:hover{background:var(--pri2)}
+.rc-wa-btn{background:#fff;color:#25D366;border:1.5px solid #25D366;border-radius:var(--rs);padding:7px 12px;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .2s}
+.rc-wa-btn:hover{background:#25D366;color:#fff}
+
+/* ════════════════════════════════════
+   ROOM DETAIL MODAL
+════════════════════════════════════ */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);z-index:9000;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-bg.open{opacity:1;pointer-events:all}
+/* on desktop → center */
+@media(min-width:640px){
+  .modal-bg{align-items:center;padding:20px}
+}
+.modal{background:var(--white);width:100%;max-width:700px;max-height:92vh;overflow-y:auto;border-radius:20px 20px 0 0;transform:translateY(30px);transition:transform .3s;position:relative;box-shadow:var(--shl)}
+@media(min-width:640px){
+  .modal{border-radius:20px;transform:scale(.95)}
+}
+.modal-bg.open .modal{transform:translateY(0)}
+@media(min-width:640px){
+  .modal-bg.open .modal{transform:scale(1)}
+}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 0;display:block}
+@media(min-width:640px){.modal-handle{display:none}}
+.modal-x{position:absolute;top:14px;right:14px;background:var(--bg);border:none;width:32px;height:32px;border-radius:50%;font-size:.9rem;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--txt3)}
+.modal-x:hover{background:var(--border)}
+
+/* modal gallery */
+.modal-gallery{height:250px;position:relative;overflow:hidden}
+@media(min-width:640px){.modal-gallery{height:300px}}
+.mg-slides{display:flex;height:100%;transition:transform .4s}
+.mg-slide{min-width:100%;height:100%;flex-shrink:0}
+.mg-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:1rem;z-index:3;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mg-arrow:hover{background:var(--pri)}
+.mg-al{left:10px}.mg-ar{right:10px}
+.mg-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+.mg-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);border:none;padding:0;cursor:pointer;transition:all .2s}
+.mg-dot.on{background:#fff;width:16px;border-radius:3px}
+.mg-counter{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.5);color:#fff;padding:3px 10px;border-radius:5px;font-size:.72rem;font-weight:700}
+
+/* modal body */
+.modal-body{padding:18px 20px}
+@media(min-width:640px){.modal-body{padding:22px 28px}}
+.mb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.mb-type{font-size:1.2rem;font-weight:800;color:var(--txt)}
+.mb-rating{background:var(--pri);color:#fff;padding:4px 10px;border-radius:7px;font-size:.8rem;font-weight:800;flex-shrink:0}
+.mb-loc{font-size:.8rem;color:var(--txt3);margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.mb-loc b{color:var(--pri);font-weight:700}
+
+/* person picker */
+.person-section{background:var(--bg);border-radius:var(--r);padding:14px;margin-bottom:14px;border:1px solid var(--border)}
+.ps-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt3);margin-bottom:12px}
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:480px){.ps-grid{grid-template-columns:repeat(3,1fr)}}
+.ps-item{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:10px;text-align:center;transition:border-color .2s}
+.ps-item:hover{border-color:var(--pri)}
+.ps-label{font-size:.75rem;font-weight:700;color:var(--txt);margin-bottom:1px}
+.ps-sub{font-size:.62rem;color:var(--txt3);margin-bottom:8px;line-height:1.3}
+.ps-counter{display:flex;align-items:center;justify-content:center;gap:6px}
+.ps-btn{background:var(--bg);border:1.5px solid var(--border);width:26px;height:26px;border-radius:6px;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--txt)}
+.ps-btn:hover{border-color:var(--pri);color:var(--pri)}
+.ps-num{font-size:.9rem;font-weight:800;color:var(--txt);width:24px;text-align:center}
+.ps-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.6rem;font-weight:700;margin-top:5px}
+.ps-tag.free{background:#ecfdf5;color:var(--green)}
+.ps-tag.charge{background:var(--acc-pale);color:var(--acc)}
+
+/* nights */
+.nights-row{display:flex;align-items:center;justify-content:space-between;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:8px}
+.nr-left b{font-size:.88rem;font-weight:700;color:var(--txt)}
+.nr-left span{font-size:.7rem;color:var(--txt3);display:block}
+.nr-counter{display:flex;align-items:center;gap:8px}
+.nr-btn{background:var(--bg);border:1.5px solid var(--border);width:32px;height:32px;border-radius:8px;font-size:1.1rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.nr-btn:hover{border-color:var(--pri);color:var(--pri)}
+.nr-num{font-size:1.1rem;font-weight:800;color:var(--txt);width:30px;text-align:center}
+
+/* price breakdown */
+.price-box{background:var(--dark);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.pb-rows{margin-bottom:12px}
+.pb-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.78rem}
+.pb-row label{color:rgba(255,255,255,.5)}
+.pb-row span{color:#fff;font-weight:600}
+.pb-row.extra span{color:var(--acc)}
+.pb-row.free span{color:var(--green)}
+.pb-total{display:flex;justify-content:space-between;align-items:center;background:var(--pri);border-radius:var(--rs);padding:12px 14px}
+.pb-total-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.75)}
+.pb-total-amt{font-size:1.7rem;font-weight:800;color:#fff;line-height:1}
+
+/* guest info */
+.guest-info{margin-bottom:14px}
+.gi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.gi-f label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3);display:block;margin-bottom:4px}
+.gi-f input{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--txt);outline:none;background:var(--bg);transition:all .2s}
+.gi-f input:focus{border-color:var(--pri);background:var(--white);box-shadow:0 0 0 3px rgba(26,107,90,.07)}
+.gi-f.full{grid-column:span 2}
+
+/* action buttons */
+.modal-actions{display:flex;flex-direction:column;gap:8px}
+.action-wa{background:#25D366;color:#fff;border:none;border-radius:var(--r);padding:14px;font-size:.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.action-wa:hover{background:#1fbb5c;transform:translateY(-1px)}
+.action-call{background:var(--dark);color:#fff;border:none;border-radius:var(--r);padding:12px;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s}
+.action-call:hover{background:var(--dark2)}
+.wa-note{font-size:.7rem;color:var(--txt3);text-align:center;margin-top:6px;line-height:1.5}
+
+/* ════════════════════════════════════
+   PACKAGES PAGE
+════════════════════════════════════ */
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.pkg-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:all .3s;box-shadow:var(--sh);position:relative}
+.pkg-card:hover{transform:translateY(-4px);box-shadow:var(--shm)}
+.pkg-card.pop{border-color:var(--pri)}
+.pkg-pop-tag{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:3px 16px 6px;border-radius:0 0 10px 10px;font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;z-index:3}
+.pkg-img{height:160px;position:relative;overflow:hidden}
+.pkg-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pkg-card:hover .pkg-img img{transform:scale(1.06)}
+.pkg-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 55%)}
+.pkg-dur{position:absolute;bottom:10px;left:12px;z-index:2;color:#fff;font-weight:800;font-size:.95rem;line-height:1}
+.pkg-dur small{font-size:.62rem;font-weight:400;opacity:.8;display:block;letter-spacing:.5px}
+.pkg-body{padding:14px}
+.pkg-name{font-weight:700;font-size:.9rem;color:var(--txt);margin-bottom:3px}
+.pkg-route{font-size:.72rem;color:var(--pri);font-weight:700;margin-bottom:8px}
+.pkg-incs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px}
+.pkg-inc{font-size:.64rem;color:var(--txt2);background:var(--bg);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
+.pkg-foot{border-top:1px solid var(--border2);padding-top:10px}
+.pkg-pp{font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px}
+.pkg-price{font-size:1.25rem;font-weight:800;color:var(--txt);line-height:1;margin-bottom:5px}
+.pkg-price .s{font-size:.7rem;vertical-align:super;color:var(--txt3);font-weight:400}
+.pkg-prow{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.pkg-prow label{font-size:.7rem;color:var(--txt3)}
+.pkg-pinp{width:50px;border:1.5px solid var(--border);border-radius:6px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;text-align:center;outline:none;transition:border-color .2s}
+.pkg-pinp:focus{border-color:var(--pri)}
+.pkg-total{font-size:.72rem;color:var(--pri);font-weight:700;margin-bottom:8px}
+.pkg-btn{width:100%;background:var(--pri);color:#fff;border:none;border-radius:var(--rs);padding:10px;font-size:.8rem;font-weight:700;transition:all .2s}
+.pkg-btn:hover{background:var(--pri2)}
+
+/* ════════════════════════════════════
+   TRANSFERS PAGE
+════════════════════════════════════ */
+.transfer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.tr-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:20px;box-shadow:var(--sh);transition:all .3s}
+.tr-card:hover{transform:translateY(-3px);box-shadow:var(--shm)}
+.tr-icon{font-size:2rem;margin-bottom:10px}
+.tr-name{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:4px}
+.tr-route{font-size:.75rem;color:var(--pri);font-weight:600;margin-bottom:8px}
+.tr-desc{font-size:.78rem;color:var(--txt3);line-height:1.6;margin-bottom:12px}
+.tr-price{font-size:1.2rem;font-weight:800;color:var(--txt);margin-bottom:10px}
+.tr-price .s{font-size:.7rem;vertical-align:super;color:var(--txt3)}
+.tr-price small{font-size:.65rem;color:var(--txt3);font-weight:400}
+.tr-btn{width:100%;background:#25D366;color:#fff;border:none;border-radius:var(--rs);padding:10px;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
+.tr-btn:hover{background:#1fbb5c}
+
+/* ════════════════════════════════════
+   CONTACT PAGE
+════════════════════════════════════ */
+.contact-wrap{max-width:600px;margin:0 auto}
+.contact-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:24px;box-shadow:var(--sh);margin-bottom:16px}
+.cc-title{font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:14px}
+.cc-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:var(--rs);margin-bottom:8px;cursor:pointer;transition:background .2s}
+.cc-item:hover{background:var(--pri-light)}
+.cc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cc-ico.wa{background:#25D366}
+.cc-ico.ph{background:var(--pri)}
+.cc-ico.em{background:var(--acc)}
+.cc-lbl{font-size:.72rem;color:var(--txt3)}
+.cc-val{font-size:.88rem;font-weight:700;color:var(--txt)}
+
+/* ════════════════════════════════════
+   FLOATING WA BUTTON
+════════════════════════════════════ */
+.wa-float{position:fixed;bottom:24px;right:20px;z-index:888;background:#25D366;color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);cursor:pointer;animation:wap 2.5s infinite}
+.wa-float:hover{transform:scale(1.1)}
+@keyframes wap{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.5)}50%{box-shadow:0 4px 24px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.08)}}
+
+/* ════════════════════════════════════
+   TRUST STRIP
+════════════════════════════════════ */
+.trust{background:var(--dark);padding:28px 20px}
+.trust-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(min-width:640px){.trust-inner{grid-template-columns:repeat(4,1fr)}}
+.ti{text-align:center}
+.ti-n{font-size:1.6rem;font-weight:800;color:#fff}
+.ti-l{font-size:.68rem;color:rgba(255,255,255,.35);letter-spacing:.5px;margin-top:2px}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer{background:var(--dark2);padding:28px 20px;color:rgba(255,255,255,.35);font-size:.75rem;text-align:center}
+footer b{color:rgba(255,255,255,.6)}
+
+/* ════════════════════════════════════
+   RESPONSIVE — DESKTOP
+════════════════════════════════════ */
+@media(min-width:768px){
+  .rooms-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+}
+@media(max-width:640px){
+  .nav{display:none}
+  .hamburger{display:flex}
+  .hdr-wa{padding:7px 12px;font-size:.75rem}
+  .hero{padding:36px 16px 48px}
+  .loc-pill{padding:7px 14px;font-size:.78rem}
+  .search-bar{flex-direction:column}
+  .sb-f{min-width:0;width:100%}
+  .rooms-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .rc-img{height:160px}
+  .rc-body{padding:10px}
+  .rc-type{font-size:.85rem}
+  .rc-view-btn{padding:7px 12px;font-size:.72rem}
+  .rc-btns{gap:4px}
+}
+@media(max-width:400px){
+  .rooms-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-ico">🏔️</div>
+      <div>
+        <div class="logo-txt">J&K Tours</div>
+        <div class="logo-sub">Your Travel Partner</div>
+      </div>
+    </a>
+    <nav class="nav" id="main-nav">
+      <button class="nav-btn on" onclick="goPage('hotels',this)">🏨 Hotels</button>
+      <button class="nav-btn" onclick="goPage('packages',this)">🗺️ Packages</button>
+      <button class="nav-btn" onclick="goPage('transfers',this)">🚗 Transfers</button>
+      <button class="nav-btn" onclick="goPage('contact',this)">📞 Contact</button>
+    </nav>
+    <button class="hdr-wa" onclick="quickWA()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </button>
+    <button class="hamburger" id="ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mob-menu" id="mob-menu">
+    <button class="mob-nav-btn on" onclick="goPage('hotels',this);toggleMob()">🏨 Hotels</button>
+    <button class="mob-nav-btn" onclick="goPage('packages',this);toggleMob()">🗺️ Tour Packages</button>
+    <button class="mob-nav-btn" onclick="goPage('transfers',this);toggleMob()">🚗 Transfers</button>
+    <button class="mob-nav-btn" onclick="goPage('contact',this);toggleMob()">📞 Contact</button>
+    <button class="mob-nav-btn" style="background:#25D366;color:#fff;margin-top:4px" onclick="quickWA()">💬 WhatsApp Us</button>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">✦ Jammu & Kashmir Travel</div>
+    <h1>Find Rooms Across<br><span>Kashmir & Jammu</span></h1>
+    <p class="hero-sub">Select your destination — see available rooms with images & prices. Book directly via WhatsApp. No hotel names shown.</p>
+
+    <!-- LOCATION PILLS -->
+    <div class="loc-pills" id="hero-pills">
+      <div class="loc-pill on" onclick="filterLoc('all',this)">🗺️ All Locations</div>
+      <div class="loc-pill" onclick="filterLoc('srinagar',this)">🏙️ Srinagar</div>
+      <div class="loc-pill" onclick="filterLoc('dallake',this)">🚢 Dal Lake</div>
+      <div class="loc-pill" onclick="filterLoc('gulmarg',this)">🏔️ Gulmarg</div>
+      <div class="loc-pill" onclick="filterLoc('pahalgam',this)">🌿 Pahalgam</div>
+      <div class="loc-pill" onclick="filterLoc('patnitop',this)">⛄ Patnitop</div>
+      <div class="loc-pill" onclick="filterLoc('jammu',this)">🏛️ Jammu</div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar">
+      <div class="sb-f"><label>Location</label>
+        <select class="sb-inp" id="sb-loc">
+          <option value="all">All Locations</option>
+          <option value="srinagar">Srinagar</option>
+          <option value="dallake">Dal Lake (Houseboat)</option>
+          <option value="gulmarg">Gulmarg</option>
+          <option value="pahalgam">Pahalgam</option>
+          <option value="patnitop">Patnitop</option>
+          <option value="jammu">Jammu</option>
+        </select>
+      </div>
+      <div class="sb-f"><label>Check-in</label><input type="date" class="sb-inp" id="sb-ci"/></div>
+      <div class="sb-f"><label>Check-out</label><input type="date" class="sb-inp" id="sb-co"/></div>
+      <button class="sb-go" onclick="doSearch()">Search →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PAGE: HOTELS
+═══════════════════════════════════ -->
+<div class="page on" id="page-hotels">
+
+  <!-- LOCATION TABS -->
+  <div class="loc-tabs" id="loc-tabs" style="margin-top:20px">
+    <button class="lt on" onclick="filterLoc('all',this)">🗺️ All <span class="lc">9</span></button>
+    <button class="lt" onclick="filterLoc('srinagar',this)">🏙️ Srinagar <span class="lc">2</span></button>
+    <button class="lt" onclick="filterLoc('dallake',this)">🚢 Dal Lake <span class="lc">2</span></button>
+    <button class="lt" onclick="filterLoc('gulmarg',this)">🏔️ Gulmarg <span class="lc">2</span></button>
+    <button class="lt" onclick="filterLoc('pahalgam',this)">🌿 Pahalgam <span class="lc">1</span></button>
+    <button class="lt" onclick="filterLoc('patnitop',this)">⛄ Patnitop <span class="lc">1</span></button>
+    <button class="lt" onclick="filterLoc('jammu',this)">🏛️ Jammu <span class="lc">1</span></button>
+  </div>
+
+  <div class="sec-hd">
+    <div class="sec-hd-l">
+      <div class="ey">Available Rooms</div>
+      <h2 id="rooms-title">All Locations <span>Kashmir & Jammu</span></h2>
+    </div>
+    <div class="count-badge" id="rooms-count">9 Rooms</div>
+  </div>
+
+  <!-- ROOMS GRID -->
+  <div class="rooms-grid" id="rooms-grid">
+    <!-- Generated by JS -->
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════
+     PAGE: PACKAGES
+═══════════════════════════════════ -->
+<div class="page" id="page-packages">
+  <div class="sec-hd" style="margin-top:8px">
+    <div class="sec-hd-l"><div class="ey">Tour Packages</div><h2>Kashmir <span>Trip Plans</span></h2></div>
+  </div>
+  <div class="pkg-grid">
+
+    <div class="pkg-card">
+      <div class="pkg-img"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&q=70" alt=""/><div class="pkg-dur">2N 3D<small>Weekend</small></div></div>
+      <div class="pkg-body">
+        <div class="pkg-name">Kashmir Weekend Escape</div>
+        <div class="pkg-route">📍 Srinagar · Dal Lake · Mughal Gardens</div>
+        <div class="pkg-incs"><span class="pkg-inc">Hotel</span><span class="pkg-inc">Meals</span><span class="pkg-inc">Shikara</span><span class="pkg-inc">Transfer</span><span class="pkg-inc">Guide</span></div>
+        <div class="pkg-foot">
+          <div class="pkg-pp">Per Person</div>
+          <div class="pkg-price"><span class="s">₹</span>6,999</div>
+          <div class="pkg-prow"><label>👥</label><input type="number" class="pkg-pinp" id="pi0" value="2" min="1" oninput="pCalc(0,6999)"/></div>
+          <div class="pkg-total" id="pt0">Total: ₹13,998 (2 persons)</div>
+          <button class="pkg-btn" onclick="pkgBook('Kashmir Weekend Escape — 2N 3D',6999,0)">📱 Book on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pkg-card pop">
+      <div class="pkg-pop-tag">⭐ Best Value</div>
+      <div class="pkg-img"><img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=400&q=70" alt=""/><div class="pkg-dur">4N 5D<small>Classic</small></div></div>
+      <div class="pkg-body">
+        <div class="pkg-name">Classic Kashmir Tour</div>
+        <div class="pkg-route">📍 Srinagar · Gulmarg · Pahalgam · Dal Lake</div>
+        <div class="pkg-incs"><span class="pkg-inc">4★ Hotel</span><span class="pkg-inc">Meals</span><span class="pkg-inc">Cable Car</span><span class="pkg-inc">AC Car</span><span class="pkg-inc">Guide</span></div>
+        <div class="pkg-foot">
+          <div class="pkg-pp">Per Person</div>
+          <div class="pkg-price"><span class="s">₹</span>13,999</div>
+          <div class="pkg-prow"><label>👥</label><input type="number" class="pkg-pinp" id="pi1" value="2" min="1" oninput="pCalc(1,13999)"/></div>
+          <div class="pkg-total" id="pt1">Total: ₹27,998 (2 persons)</div>
+          <button class="pkg-btn" onclick="pkgBook('Classic Kashmir Tour — 4N 5D',13999,1)">📱 Book on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-img"><img src="https://images.unsplash.com/photo-1571366343168-631c5d600a47?w=400&q=70" alt=""/><div class="pkg-dur">6N 7D<small>Explorer</small></div></div>
+      <div class="pkg-body">
+        <div class="pkg-name">Complete Kashmir Explorer</div>
+        <div class="pkg-route">📍 Srinagar · Gulmarg · Pahalgam · Sonamarg · Houseboat</div>
+        <div class="pkg-incs"><span class="pkg-inc">Hotel</span><span class="pkg-inc">3 Meals</span><span class="pkg-inc">Gondola</span><span class="pkg-inc">Houseboat</span><span class="pkg-inc">All Transfers</span></div>
+        <div class="pkg-foot">
+          <div class="pkg-pp">Per Person</div>
+          <div class="pkg-price"><span class="s">₹</span>22,999</div>
+          <div class="pkg-prow"><label>👥</label><input type="number" class="pkg-pinp" id="pi2" value="2" min="1" oninput="pCalc(2,22999)"/></div>
+          <div class="pkg-total" id="pt2">Total: ₹45,998 (2 persons)</div>
+          <button class="pkg-btn" onclick="pkgBook('Complete Kashmir Explorer — 6N 7D',22999,2)">📱 Book on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pkg-card pop">
+      <div class="pkg-pop-tag">👑 Luxury</div>
+      <div class="pkg-img"><img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=400&q=70" alt=""/><div class="pkg-dur">8N 9D<small>Grand Luxury</small></div></div>
+      <div class="pkg-body">
+        <div class="pkg-name">Grand Kashmir Luxury Tour</div>
+        <div class="pkg-route">📍 Jammu · Srinagar · Gulmarg · Pahalgam · Sonamarg · Yusmarg</div>
+        <div class="pkg-incs"><span class="pkg-inc">Luxury Hotels</span><span class="pkg-inc">3 Meals</span><span class="pkg-inc">Gondola P2</span><span class="pkg-inc">Luxury SUV</span></div>
+        <div class="pkg-foot">
+          <div class="pkg-pp">Per Person</div>
+          <div class="pkg-price"><span class="s">₹</span>38,999</div>
+          <div class="pkg-prow"><label>👥</label><input type="number" class="pkg-pinp" id="pi3" value="2" min="1" oninput="pCalc(3,38999)"/></div>
+          <div class="pkg-total" id="pt3">Total: ₹77,998 (2 persons)</div>
+          <button class="pkg-btn" onclick="pkgBook('Grand Kashmir Luxury Tour — 8N 9D',38999,3)">📱 Book on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PAGE: TRANSFERS
+═══════════════════════════════════ -->
+<div class="page" id="page-transfers">
+  <div class="sec-hd" style="margin-top:8px">
+    <div class="sec-hd-l"><div class="ey">Transportation</div><h2>Airport & City <span>Transfers</span></h2></div>
+  </div>
+  <div class="transfer-grid">
+    <div class="tr-card"><div class="tr-icon">🚕</div><div class="tr-name">Srinagar Airport Transfer</div><div class="tr-route">Airport ↔ Hotel / Houseboat</div><div class="tr-desc">AC sedan pick & drop. Meet & greet at arrival gate. 24/7 available. WhatsApp number shared in advance.</div><div class="tr-price"><span class="s">₹</span>600 <small>one way</small></div><button class="tr-btn" onclick="trWA('Srinagar Airport Transfer')"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Book Transfer</button></div>
+    <div class="tr-card"><div class="tr-icon">🚐</div><div class="tr-name">Srinagar → Gulmarg</div><div class="tr-route">Srinagar City ↔ Gulmarg</div><div class="tr-desc">AC Innova or similar. 52km, approx 2 hours. Stops at scenic viewpoints. Return same day or next day option.</div><div class="tr-price"><span class="s">₹</span>2,500 <small>full cab</small></div><button class="tr-btn" onclick="trWA('Srinagar to Gulmarg Transfer')"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Book Transfer</button></div>
+    <div class="tr-card"><div class="tr-icon">🚌</div><div class="tr-name">Srinagar → Pahalgam</div><div class="tr-route">Srinagar ↔ Pahalgam</div><div class="tr-desc">AC vehicle with driver. 95km, approx 3 hours. Betaab Valley, Aru Valley stops included on request.</div><div class="tr-price"><span class="s">₹</span>3,200 <small>full cab</small></div><button class="tr-btn" onclick="trWA('Srinagar to Pahalgam Transfer')"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Book Transfer</button></div>
+    <div class="tr-card"><div class="tr-icon">🚁</div><div class="tr-name">Jammu → Srinagar</div><div class="tr-route">Jammu ↔ Srinagar (Overland)</div><div class="tr-desc">Private cab via NH44. Scenic Jawahar Tunnel route. 250km, approx 6 hours. Stops at Patnitop & Ramban on request.</div><div class="tr-price"><span class="s">₹</span>5,000 <small>full cab</small></div><button class="tr-btn" onclick="trWA('Jammu to Srinagar Transfer')"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Book Transfer</button></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PAGE: CONTACT
+═══════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="sec-hd" style="margin-top:8px">
+    <div class="sec-hd-l"><div class="ey">Get In Touch</div><h2>Contact <span>Us</span></h2></div>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-card">
+      <div class="cc-title">📱 Reach Us Instantly</div>
+      <div class="cc-item" onclick="quickWA()"><div class="cc-ico wa">💬</div><div><div class="cc-lbl">WhatsApp (Fastest)</div><div class="cc-val">+91 94190-XXXXX</div></div></div>
+      <div class="cc-item"><div class="cc-ico ph">📞</div><div><div class="cc-lbl">Phone Call</div><div class="cc-val">+91 94190-XXXXX</div></div></div>
+      <div class="cc-item"><div class="cc-ico em">✉️</div><div><div class="cc-lbl">Email</div><div class="cc-val">info@jktours.in</div></div></div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-title">🕐 Working Hours</div>
+      <div style="font-size:.85rem;color:var(--txt2);line-height:2">
+        <div>Monday – Saturday: <b>8:00 AM – 9:00 PM</b></div>
+        <div>Sunday: <b>9:00 AM – 6:00 PM</b></div>
+        <div style="margin-top:8px;padding:10px;background:var(--pri-light);border-radius:var(--rs);color:var(--pri);font-weight:600;font-size:.82rem">💬 WhatsApp queries answered 24/7</div>
+      </div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-title">📍 Locations We Cover</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🏙️ Srinagar</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🚢 Dal Lake</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🏔️ Gulmarg</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🌿 Pahalgam</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">⛄ Patnitop</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🏛️ Jammu</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">❄️ Sonamarg</span>
+        <span style="background:var(--pri-light);color:var(--pri);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700">🌾 Yusmarg</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust" style="margin-top:40px">
+  <div class="trust-inner">
+    <div class="ti"><div class="ti-n">40+</div><div class="ti-l">Hotels Available</div></div>
+    <div class="ti"><div class="ti-n">5K+</div><div class="ti-l">Happy Guests</div></div>
+    <div class="ti"><div class="ti-n">₹0</div><div class="ti-l">Booking Fee</div></div>
+    <div class="ti"><div class="ti-n">24/7</div><div class="ti-l">WhatsApp Support</div></div>
+  </div>
+</div>
+
+<footer>© 2025 <b>J&K Tours</b> · Jammu & Kashmir · All rooms booked directly via WhatsApp · No hidden charges</footer>
+
+<!-- FLOAT WA -->
+<button class="wa-float" onclick="quickWA()">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<!-- ═══════════════════════════════════
+     ROOM DETAIL MODAL
+═══════════════════════════════════ -->
+<div class="modal-bg" id="room-modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <button class="modal-x" onclick="closeModal()">✕</button>
+
+    <!-- gallery -->
+    <div class="modal-gallery">
+      <div class="mg-slides" id="mg-slides">
+        <!-- slides injected by JS -->
+      </div>
+      <button class="mg-arrow mg-al" onclick="mgSlide(-1)">‹</button>
+      <button class="mg-arrow mg-ar" onclick="mgSlide(1)">›</button>
+      <div class="mg-dots" id="mg-dots"></div>
+      <div class="mg-counter" id="mg-counter">1 / 3</div>
+    </div>
+
+    <div class="modal-body">
+      <!-- header -->
+      <div class="mb-top">
+        <div class="mb-type" id="m-type">Room Type</div>
+        <div class="mb-rating" id="m-rating">⭐ 4.8</div>
+      </div>
+      <div class="mb-loc" id="m-loc">📍 Location</div>
+
+      <!-- amenities -->
+      <div class="rc-ams" id="m-ams" style="margin-bottom:12px"></div>
+
+      <!-- highlights -->
+      <div class="rc-hi" id="m-hi" style="margin-bottom:14px"></div>
+
+      <!-- PERSON PICKER -->
+      <div class="person-section">
+        <div class="ps-title">👥 Select Guests</div>
+        <div class="ps-grid">
+          <div class="ps-item">
+            <div class="ps-label">Single</div>
+            <div class="ps-sub">1 Adult<br>Solo traveller</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('single',-1)">−</button>
+              <div class="ps-num" id="p-single">0</div>
+              <button class="ps-btn" onclick="pAdj('single',1)">+</button>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-label">Couple / GF-BF</div>
+            <div class="ps-sub">2 Adults<br>Together</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('couple',-1)">−</button>
+              <div class="ps-num" id="p-couple">1</div>
+              <button class="ps-btn" onclick="pAdj('couple',1)">+</button>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-label">Extra Adults</div>
+            <div class="ps-sub">Beyond base<br>capacity</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('extra',-1)">−</button>
+              <div class="ps-num" id="p-extra">0</div>
+              <button class="ps-btn" onclick="pAdj('extra',1)">+</button>
+            </div>
+            <div class="ps-tag charge" id="extra-tag">+₹500/night</div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-label">Children 5–12</div>
+            <div class="ps-sub">Half charge<br>applies</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('child',-1)">−</button>
+              <div class="ps-num" id="p-child">0</div>
+              <button class="ps-btn" onclick="pAdj('child',1)">+</button>
+            </div>
+            <div class="ps-tag charge">+₹300/night</div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-label">Infants 0–4</div>
+            <div class="ps-sub">Completely<br>FREE</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('infant',-1)">−</button>
+              <div class="ps-num" id="p-infant">0</div>
+              <button class="ps-btn" onclick="pAdj('infant',1)">+</button>
+            </div>
+            <div class="ps-tag free">FREE ✓</div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-label">Nights</div>
+            <div class="ps-sub">Duration<br>of stay</div>
+            <div class="ps-counter">
+              <button class="ps-btn" onclick="pAdj('nights',-1)">−</button>
+              <div class="ps-num" id="p-nights">1</div>
+              <button class="ps-btn" onclick="pAdj('nights',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICE BREAKDOWN -->
+      <div class="price-box">
+        <div class="pb-rows" id="pb-rows">
+          <div class="pb-row"><label>Select guests above</label><span>—</span></div>
+        </div>
+        <div class="pb-total">
+          <div class="pb-total-label">Total Payable</div>
+          <div class="pb-total-amt" id="pb-total">₹0</div>
+        </div>
+      </div>
+
+      <!-- GUEST INFO -->
+      <div class="guest-info">
+        <div class="gi-row">
+          <div class="gi-f"><label>Your Name *</label><input type="text" id="g-name" placeholder="Full name"/></div>
+          <div class="gi-f"><label>WhatsApp Number *</label><input type="tel" id="g-phone" placeholder="+91 XXXXX XXXXX"/></div>
+          <div class="gi-f"><label>Check-in Date</label><input type="date" id="g-ci" oninput="calcPrice()"/></div>
+          <div class="gi-f"><label>City / State</label><input type="text" id="g-city" placeholder="Delhi, Mumbai..."/></div>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="modal-actions">
+        <button class="action-wa" onclick="sendWA()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          📤 Send Booking Details on WhatsApp
+        </button>
+        <button class="action-call">📞 Call Now — +91 94190-XXXXX</button>
+      </div>
+      <div class="wa-note">Room type, location, all guest details & full price breakdown will be sent as a formatted WhatsApp message.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+
+// ══ ROOM DATA — No hotel names, just type + location + price + placeholder images ══
+// When you want to add real images: replace the imgs array with your actual image paths
+// Example: imgs: ['/images/srinagar-room1.jpg', '/images/srinagar-room2.jpg']
+
+const ROOMS = [
+  // ── SRINAGAR ──
+  {
+    loc:'srinagar', locName:'Srinagar', locIcon:'🏙️',
+    type:'Single Room', ratingNum:4.6,
+    price:1200, extraR:0, cap:'1 Adult · Single Bed',
+    ams:['❄️ AC','📶 WiFi','🍳 Breakfast','📺 TV','🚿 Bath'],
+    hi:['Mountain view window','24hr hot water','Walking distance to market'],
+    imgs:null, // → will show placeholder until you add images
+    imgCount:3
+  },
+  {
+    loc:'srinagar', locName:'Srinagar', locIcon:'🏙️',
+    type:'Couple / Double Room', ratingNum:4.7,
+    price:2200, extraR:0, cap:'2 Adults · King Bed',
+    ams:['❄️ AC','📶 WiFi','🍳 Breakfast','🛁 Bathtub','🌅 Mountain View','🍷 Mini Bar'],
+    hi:['City & mountain view','Couple friendly · ID required','Free room decoration on request'],
+    imgs:null,
+    imgCount:4
+  },
+  {
+    loc:'srinagar', locName:'Srinagar', locIcon:'🏙️',
+    type:'Family Room', ratingNum:4.5,
+    price:3800, extraR:600, cap:'4 Adults base · Max 7 · 3 Beds',
+    ams:['❄️ AC','📶 WiFi','🍽️ Meals','🧒 Kids Area','🛁 2 Baths','🅿️ Parking'],
+    hi:['Spacious family suite','Extra persons ₹600/night','Kids under 5 stay FREE'],
+    imgs:null,
+    imgCount:4
+  },
+
+  // ── DAL LAKE ──
+  {
+    loc:'dallake', locName:'Dal Lake', locIcon:'🚢',
+    type:'Houseboat — Standard', ratingNum:4.8,
+    price:4500, extraR:1000, cap:'2 Adults base · Dal Lake',
+    ams:['🛶 Shikara Ride','🍽️ 3 Meals','📶 WiFi','❄️ AC','🌅 Lake View','🎣 Fishing'],
+    hi:['All 3 meals — Kashmiri cuisine','Morning & evening shikara ride','Extra person ₹1,000/night'],
+    imgs:null,
+    imgCount:5
+  },
+  {
+    loc:'dallake', locName:'Dal Lake', locIcon:'🚢',
+    type:'Houseboat — Deluxe Suite', ratingNum:4.9,
+    price:6500, extraR:1200, cap:'2 Adults base · King Bed · Lake View',
+    ams:['🛶 Shikara Ride','🍽️ 3 Meals','📶 WiFi','❄️ AC','🌅 Panoramic View','🏠 Heritage Décor'],
+    hi:['Premium heritage houseboat','Kashmiri wooden carvings decor','Sunset view sitout deck'],
+    imgs:null,
+    imgCount:5
+  },
+
+  // ── GULMARG ──
+  {
+    loc:'gulmarg', locName:'Gulmarg', locIcon:'🏔️',
+    type:'Deluxe Mountain View Room', ratingNum:4.7,
+    price:5500, extraR:0, cap:'2 Adults · King Bed · 2690m Altitude',
+    ams:['❄️ AC+Heat','📶 WiFi','🍽️ Restaurant','🔥 Fireplace','🎿 Ski Access','🌄 Himalayan View'],
+    hi:['Himalayan mountain facing room','500m from Gulmarg Gondola','Kids under 12 stay FREE'],
+    imgs:null,
+    imgCount:4
+  },
+  {
+    loc:'gulmarg', locName:'Gulmarg', locIcon:'🏔️',
+    type:'Family Chalet', ratingNum:4.6,
+    price:12000, extraR:1200, cap:'4 Adults + 2 Kids FREE · 2 Bedrooms',
+    ams:['❄️ AC+Heat','📶 WiFi','🍽️ All Meals','🔥 Fireplace','🎿 Ski Access','🍳 Kitchenette'],
+    hi:['2 bedroom chalet for families','Kids under 12 stay completely FREE','Ski rental available in winter'],
+    imgs:null,
+    imgCount:4
+  },
+
+  // ── PAHALGAM ──
+  {
+    loc:'pahalgam', locName:'Pahalgam', locIcon:'🌿',
+    type:'River View Room', ratingNum:4.5,
+    price:3200, extraR:500, cap:'2 Adults · Double Bed · Lidder River View',
+    ams:['❄️ AC','📶 WiFi','🍳 Breakfast','🌊 River View','🐎 Pony Rides','🔥 Bonfire'],
+    hi:['Lidder River view balcony','Bonfire & BBQ every evening','Betaab Valley 2km away'],
+    imgs:null,
+    imgCount:3
+  },
+
+  // ── PATNITOP ──
+  {
+    loc:'patnitop', locName:'Patnitop', locIcon:'⛄',
+    type:'Hill View Cottage Room', ratingNum:4.4,
+    price:2500, extraR:400, cap:'2–3 Adults · Double/Twin Bed',
+    ams:['📶 WiFi','🍽️ Meals','🔥 Heater','⛄ Snow View','🌲 Pine Forest','☕ Room Service'],
+    hi:['Pine forest & snow views','Heater in all rooms','Family rooms with extra beds'],
+    imgs:null,
+    imgCount:3
+  },
+
+  // ── JAMMU ──
+  {
+    loc:'jammu', locName:'Jammu', locIcon:'🏛️',
+    type:'Standard Room', ratingNum:4.2,
+    price:1400, extraR:0, cap:'1–2 Adults · Double Bed',
+    ams:['❄️ AC','📶 WiFi','☕ 24hr Service','📺 TV','🚿 Hot Water','🅿️ Parking'],
+    hi:['City centre location','Couple friendly with valid ID','Vaishno Devi assistance free'],
+    imgs:null,
+    imgCount:3
+  },
+  {
+    loc:'jammu', locName:'Jammu', locIcon:'🏛️',
+    type:'Deluxe Couple Room', ratingNum:4.3,
+    price:2400, extraR:0, cap:'2 Adults · King Bed · Tawi View',
+    ams:['❄️ AC','📶 WiFi','🍳 Breakfast','🌊 Tawi View','📺 Smart TV','👫 Couple Friendly'],
+    hi:['Tawi river view from room','Unmarried couples accepted · ID must','24hr hot water & room service'],
+    imgs:null,
+    imgCount:3
+  },
+  {
+    loc:'jammu', locName:'Jammu', locIcon:'🏛️',
+    type:'Family Room', ratingNum:4.2,
+    price:3800, extraR:400, cap:'4 Adults base · 2 Queen Beds',
+    ams:['❄️ AC','📶 WiFi','🍳 Breakfast','📺 TV','🅿️ Parking','🚌 Transfer Available'],
+    hi:['2 queen beds for families','Extra bed available','Near Vaishno Devi base camp'],
+    imgs:null,
+    imgCount:3
+  },
+];
+
+// ── Image placeholders (shown until real images added) ──
+// To add real images: rooms[index].imgs = ['path1.jpg','path2.jpg','path3.jpg']
+// Or upload to WhatsApp/Google Drive and use direct links
+const LOC_PLACEHOLDER_IMGS = {
+  srinagar: ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=70','https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&q=70','https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500&q=70'],
+  dallake: ['https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=500&q=70','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=70','https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&q=70'],
+  gulmarg: ['https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&q=70','https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=500&q=70','https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=500&q=70'],
+  pahalgam: ['https://images.unsplash.com/photo-1571366343168-631c5d600a47?w=500&q=70','https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&q=70','https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=500&q=70'],
+  patnitop: ['https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=70','https://images.unsplash.com/photo-1630699144867-37acec97df5a?w=500&q=70','https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=500&q=70'],
+  jammu: ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=70','https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500&q=70','https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?w=500&q=70'],
+};
+
+// ══ RENDER ROOMS ══
+let currentLoc = 'all';
+let cardSlides = {};
+
+function renderRooms(loc) {
+  currentLoc = loc;
+  const grid = document.getElementById('rooms-grid');
+  const filtered = loc === 'all' ? ROOMS : ROOMS.filter(r => r.loc === loc);
+
+  document.getElementById('rooms-count').textContent = filtered.length + ' Rooms';
+  const locLabel = loc === 'all' ? 'All Locations' : filtered[0]?.locIcon + ' ' + filtered[0]?.locName;
+  document.getElementById('rooms-title').innerHTML = locLabel + ' <span>' + (loc === 'all' ? 'Kashmir & Jammu' : 'Available Rooms') + '</span>';
+
+  grid.innerHTML = filtered.map((r, i) => {
+    const imgs = r.imgs || LOC_PLACEHOLDER_IMGS[r.loc] || LOC_PLACEHOLDER_IMGS.srinagar;
+    const isPlaceholder = !r.imgs;
+    cardSlides[i] = 0;
+    return `
+      <div class="room-card" onclick="openModal(${ROOMS.indexOf(r)})">
+        <div class="rc-img" id="rc-img-${i}">
+          <div class="rc-img-slides" id="rcs-${i}" style="transition:transform .4s">
+            ${imgs.map(img => `<div class="rc-img-slide"><img src="${img}" alt="" loading="lazy"/></div>`).join('')}
+          </div>
+          <button class="rc-img-arr rc-arr-l" onclick="cSlide(${i},-1,event)">‹</button>
+          <button class="rc-img-arr rc-arr-r" onclick="cSlide(${i},1,event)">›</button>
+          <div class="rc-dots" id="rcd-${i}">
+            ${imgs.map((_,di)=>`<button class="rc-dot ${di===0?'on':''}" onclick="cGo(${i},${di},event)"></button>`).join('')}
+          </div>
+          ${isPlaceholder ? `<div class="rc-img-count">📷 Add Photos</div>` : `<div class="rc-img-count">📷 ${imgs.length} Photos</div>`}
+          <div class="rc-top-badges">
+            <span class="rc-badge loc">${r.locIcon} ${r.locName}</span>
+          </div>
+          <button class="rc-like" onclick="rcLike(this,event)">🤍</button>
+        </div>
+        <div class="rc-body">
+          <div class="rc-row1">
+            <div class="rc-type">${r.type}</div>
+            <div class="rc-rating">⭐ ${r.ratingNum}</div>
+          </div>
+          <div class="rc-cap">
+            ${r.cap.split('·').map(c=>`<span class="cap-pill">${c.trim()}</span>`).join('')}
+          </div>
+          <div class="rc-ams">
+            ${r.ams.slice(0,4).map(a=>`<span class="rc-am">${a}</span>`).join('')}
+            ${r.ams.length > 4 ? `<span class="rc-am">+${r.ams.length-4} more</span>` : ''}
+          </div>
+          <div class="rc-hi">
+            ${r.hi.slice(0,2).map(h=>`<span>${h}</span>`).join('')}
+          </div>
+          <div class="rc-footer">
+            <div class="rc-price">
+              <div class="rc-from">Starting from</div>
+              <div class="rc-amt"><span class="sym">₹</span>${r.price.toLocaleString('en-IN')}</div>
+              <div class="rc-per">per night${r.price <= 2000 ? ' / room' : ''}</div>
+              ${r.extraR > 0 ? `<div class="rc-extra">+₹${r.extraR.toLocaleString('en-IN')} extra person</div>` : ''}
+            </div>
+            <div class="rc-btns">
+              <button class="rc-view-btn" onclick="openModal(${ROOMS.indexOf(r)});event.stopPropagation()">View & Book</button>
+              <button class="rc-wa-btn" onclick="quickRoomWA('${r.type}','${r.locName}','${r.price}');event.stopPropagation()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ══ CARD SLIDERS ══
+function cSlide(i,d,e){e.stopPropagation();const slides=document.getElementById('rcs-'+i);const dots=document.querySelectorAll('#rcd-'+i+' .rc-dot');const total=dots.length;cardSlides[i]=(cardSlides[i]+d+total)%total;slides.style.transform='translateX(-'+(cardSlides[i]*100)+'%)';dots.forEach((dot,j)=>dot.classList.toggle('on',j===cardSlides[i]))}
+function cGo(i,idx,e){e.stopPropagation();cardSlides[i]=idx;const slides=document.getElementById('rcs-'+i);const dots=document.querySelectorAll('#rcd-'+i+' .rc-dot');slides.style.transform='translateX(-'+(idx*100)+'%)';dots.forEach((d,j)=>d.classList.toggle('on',j===idx))}
+function rcLike(btn,e){e.stopPropagation();btn.classList.toggle('on');btn.textContent=btn.classList.contains('on')?'❤️':'🤍'}
+
+// ══ MODAL STATE ══
+let curRoom = null;
+let mgIdx = 0;
+let mgTotal = 0;
+const PC = {single:0,couple:1,extra:0,child:0,infant:0,nights:1};
+
+function openModal(idx) {
+  const r = ROOMS[idx];
+  curRoom = r;
+  // reset persons
+  PC.single=0;PC.couple=1;PC.extra=0;PC.child=0;PC.infant=0;PC.nights=1;
+  ['single','couple','extra','child','infant','nights'].forEach(k=>{
+    const el=document.getElementById('p-'+k);if(el)el.textContent=PC[k];
+  });
+
+  // gallery
+  const imgs = r.imgs || LOC_PLACEHOLDER_IMGS[r.loc] || LOC_PLACEHOLDER_IMGS.srinagar;
+  mgIdx = 0; mgTotal = imgs.length;
+  document.getElementById('mg-slides').innerHTML = imgs.map(img=>`<div class="mg-slide"><img src="${img}" alt=""/></div>`).join('');
+  document.getElementById('mg-dots').innerHTML = imgs.map((_,i)=>`<button class="mg-dot ${i===0?'on':''}" onclick="mgGo(${i})"></button>`).join('');
+  document.getElementById('mg-counter').textContent = `1 / ${mgTotal}`;
+
+  // header
+  document.getElementById('m-type').textContent = r.type;
+  document.getElementById('m-rating').textContent = `⭐ ${r.ratingNum}`;
+  document.getElementById('m-loc').innerHTML = `📍 <b>${r.locIcon} ${r.locName}</b> · ${r.cap}`;
+
+  // amenities
+  document.getElementById('m-ams').innerHTML = r.ams.map(a=>`<span class="rc-am">${a}</span>`).join('');
+
+  // highlights
+  document.getElementById('m-hi').innerHTML = r.hi.map(h=>`<span>${h}</span>`).join('');
+
+  // extra rate tag
+  document.getElementById('extra-tag').textContent = r.extraR > 0 ? `+₹${r.extraR.toLocaleString('en-IN')}/night` : 'No extra charge';
+
+  // default date
+  const t = new Date();
+  document.getElementById('g-ci').value = t.toISOString().split('T')[0];
+
+  calcPrice();
+  document.getElementById('room-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('room-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('room-modal').addEventListener('click', e => {
+  if(e.target === document.getElementById('room-modal')) closeModal();
+});
+
+// ══ MODAL GALLERY ══
+function mgSlide(d) {
+  mgIdx = (mgIdx + d + mgTotal) % mgTotal;
+  updateMg();
+}
+function mgGo(i) { mgIdx = i; updateMg(); }
+function updateMg() {
+  document.getElementById('mg-slides').style.transform = `translateX(-${mgIdx*100}%)`;
+  document.querySelectorAll('#mg-dots .mg-dot').forEach((d,i)=>d.classList.toggle('on',i===mgIdx));
+  document.getElementById('mg-counter').textContent = `${mgIdx+1} / ${mgTotal}`;
+}
+
+// ══ PERSON COUNTER ══
+function pAdj(k, d) {
+  PC[k] = Math.max(0, PC[k] + d);
+  if(k === 'nights') PC[k] = Math.max(1, PC[k]);
+  document.getElementById('p-'+k).textContent = PC[k];
+  calcPrice();
+}
+
+// ══ PRICE CALC ══
+function calcPrice() {
+  if(!curRoom) return;
+  const r = curRoom;
+  const n = PC.nights;
+  const base = r.price * n;
+  const extraCost = PC.extra * r.extraR * n;
+  const childCost = PC.child * 300 * n;
+  const sub = base + extraCost + childCost;
+  const gst = Math.round(sub * 0.05);
+  const total = sub + gst;
+
+  const totalAdults = (PC.couple*2) + PC.single + PC.extra;
+
+  let rows = `<div class="pb-row"><label>Room: ${r.type}</label><span>₹${r.price.toLocaleString('en-IN')}/night</span></div>`;
+  rows += `<div class="pb-row"><label>Nights</label><span>${n} night${n>1?'s':''}</span></div>`;
+  rows += `<div class="pb-row"><label>Adults (${PC.couple} couple, ${PC.single} single)</label><span>${totalAdults} adults</span></div>`;
+  if(PC.extra > 0) rows += `<div class="pb-row extra"><label>Extra Adults (${PC.extra} × ₹${r.extraR.toLocaleString('en-IN')} × ${n}N)</label><span>+₹${extraCost.toLocaleString('en-IN')}</span></div>`;
+  if(PC.child > 0) rows += `<div class="pb-row extra"><label>Children 5–12 (${PC.child} × ₹300 × ${n}N)</label><span>+₹${childCost.toLocaleString('en-IN')}</span></div>`;
+  if(PC.infant > 0) rows += `<div class="pb-row free"><label>Infants 0–4 (${PC.infant} child)</label><span>FREE ✓</span></div>`;
+  rows += `<div class="pb-row"><label>GST 5%</label><span>₹${gst.toLocaleString('en-IN')}</span></div>`;
+
+  document.getElementById('pb-rows').innerHTML = rows;
+  document.getElementById('pb-total').textContent = '₹' + total.toLocaleString('en-IN');
+}
+
+// ══ SEND BOOKING WA ══
+function sendWA() {
+  const name = document.getElementById('g-name').value.trim();
+  const phone = document.getElementById('g-phone').value.trim();
+  if(!name||!phone){alert('Please enter your Name and WhatsApp number.');return;}
+  const r = curRoom;
+  const ci = document.getElementById('g-ci').value || 'To be confirmed';
+  const city = document.getElementById('g-city').value.trim() || '—';
+  const n = PC.nights;
+  const totalAdults = (PC.couple*2)+PC.single+PC.extra;
+  const total = document.getElementById('pb-total').textContent;
+  const ref = 'JKT-'+Math.floor(100000+Math.random()*900000);
+
+  const msg =
+`🏔️ *J&K TOURS — ROOM BOOKING*
+━━━━━━━━━━━━━━━━━━━━━
+🔖 *Ref:* ${ref}
+
+👤 *GUEST*
+   Name    : ${name}
+   Phone   : ${phone}
+   City    : ${city}
+
+🏨 *ROOM DETAILS*
+   Location: ${r.locIcon} ${r.locName}
+   Room    : ${r.type}
+   Check-in: ${ci}
+   Nights  : ${n}
+
+👥 *GUESTS BREAKDOWN*
+   Couples (GF/BF/Married): ${PC.couple} pair${PC.couple>1?'s':''} = ${PC.couple*2} persons
+   Single Adults           : ${PC.single}
+   Extra Adults            : ${PC.extra}${PC.extra>0&&r.extraR>0?' (+₹'+r.extraR.toLocaleString('en-IN')+'/night)':''}
+   Children 5–12           : ${PC.child}${PC.child>0?' (+₹300/night)':''}
+   Infants 0–4             : ${PC.infant} — *FREE* ✓
+   ─────────────
+   Total Adults            : ${totalAdults}
+
+💰 *PRICE*
+   Base Rate : ₹${r.price.toLocaleString('en-IN')}/night × ${n} nights
+   ✅ *TOTAL : ${total}* (incl. GST)
+
+━━━━━━━━━━━━━━━━━━━━━
+Please confirm availability. Thank you! 🙏`;
+
+  // ← REPLACE WITH YOUR WHATSAPP NUMBER
+  window.open('https://wa.me/919419000000?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ══ QUICK WA (no details) ══
+function quickRoomWA(type,loc,price) {
+  const msg = `🏔️ *J&K Tours — Room Inquiry*\n\nHello! I'm interested in:\n*${type}* in *${loc}*\nStarting: ₹${parseInt(price).toLocaleString('en-IN')}/night\n\nPlease share availability. Thanks! 🙏`;
+  window.open('https://wa.me/919419000000?text='+encodeURIComponent(msg),'_blank');
+}
+function quickWA(){window.open('https://wa.me/919419000000?text='+encodeURIComponent('🏔️ Hello! I want to book a room in J&K. Please help me. Thank you!'),'_blank')}
+function trWA(name){window.open('https://wa.me/919419000000?text='+encodeURIComponent('🚗 J&K Tours — Transfer Inquiry\n\nHello! I need:\n*'+name+'*\n\nPlease share pricing and availability. Thanks!'),'_blank')}
+
+// ══ FILTER LOCATION ══
+function filterLoc(loc, el) {
+  // update all pill/tab sets
+  document.querySelectorAll('.loc-pill,.lt').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll(`[onclick*="filterLoc('${loc}'"]`).forEach(b=>b.classList.add('on'));
+  if(el) el.classList.add('on');
+
+  // sync hero pills & loc-tabs
+  document.querySelectorAll(`#hero-pills .loc-pill`).forEach(p=>{
+    const match = p.getAttribute('onclick')?.includes(`'${loc}'`);
+    p.classList.toggle('on',match);
+  });
+  document.querySelectorAll(`#loc-tabs .lt`).forEach(p=>{
+    const match = p.getAttribute('onclick')?.includes(`'${loc}'`);
+    p.classList.toggle('on',match);
+  });
+
+  renderRooms(loc);
+  goPage('hotels',null,true);
+}
+
+// ══ PAGE NAVIGATION ══
+function goPage(page, btn, noScroll) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('page-'+page).classList.add('on');
+  document.querySelectorAll('.nav-btn,.mob-nav-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  if(!noScroll) window.scrollTo({top:60,behavior:'smooth'});
+}
+
+// ══ MOBILE MENU ══
+function toggleMob() {
+  const m = document.getElementById('mob-menu');
+  m.classList.toggle('open');
+}
+
+// ══ PACKAGE CALC ══
+function pCalc(i,ppp){const p=parseInt(document.getElementById('pi'+i).value)||1;document.getElementById('pt'+i).textContent='Total: ₹'+(ppp*p).toLocaleString('en-IN')+' ('+p+' persons)'}
+function pkgBook(name,ppp,i){
+  const p=parseInt(document.getElementById('pi'+i).value)||1;
+  const ref='JKT-'+Math.floor(100000+Math.random()*900000);
+  const msg=`🏔️ *J&K TOURS — PACKAGE BOOKING*\n━━━━━━━━━━━━━━━━━━━━━\n🔖 Ref: ${ref}\n\n📦 Package: ${name}\n👥 Persons: ${p}\n💰 Total: ₹${(ppp*p).toLocaleString('en-IN')}\n\nPlease confirm dates & availability. Thanks! 🙏`;
+  window.open('https://wa.me/919419000000?text='+encodeURIComponent(msg),'_blank');
+}
+[0,1,2,3].forEach(i=>pCalc(i,[6999,13999,22999,38999][i]));
+
+function doSearch(){
+  const loc = document.getElementById('sb-loc').value;
+  filterLoc(loc,null);
+}
+
+// ══ DEFAULTS ══
+window.addEventListener('DOMContentLoaded',()=>{
+  renderRooms('all');
+  const t=new Date(),f=d=>d.toISOString().split('T')[0];
+  const tm=new Date(t);tm.setDate(t.getDate()+1);
+  document.getElementById('sb-ci').value=f(t);
+  document.getElementById('sb-co').value=f(tm);
+});
+</script>
+</body>
+</html>
