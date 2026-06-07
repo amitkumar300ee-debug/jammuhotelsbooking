@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Hotel Shri Amarnath Lodge</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e8eaf0;min-height:100vh}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-card{background:#161b26;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:36px;width:100%;max-width:360px;text-align:center}
+.login-ico{font-size:2.5rem;margin-bottom:12px}
+.login-title{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:4px}
+.login-sub{font-size:.78rem;color:rgba(255,255,255,.35);margin-bottom:24px}
+.login-card input{width:100%;background:#0f1117;border:1px solid rgba(255,255,255,.12);color:#fff;padding:12px 16px;border-radius:8px;font-size:1rem;text-align:center;letter-spacing:4px;outline:none;margin-bottom:12px}
+.login-card input:focus{border-color:#4ade80}
+.login-card input::placeholder{letter-spacing:0;color:rgba(255,255,255,.25)}
+.login-btn{width:100%;background:#4ade80;color:#0a1a0f;border:none;padding:12px;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .15s}
+.login-btn:hover{background:#22c55e}
+.login-err{font-size:.75rem;color:#f87171;margin-top:8px;min-height:18px}
+.login-worker-row{margin-top:16px;text-align:left}
+.login-worker-row label{font-size:.7rem;color:rgba(255,255,255,.35);display:block;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
+.login-worker-row input{letter-spacing:0;text-align:left;font-size:.8rem}
+
+.shell{display:none;min-height:100vh}
+.shell.on{display:flex}
+.sidebar{width:220px;background:#161b26;border-right:1px solid rgba(255,255,255,.07);padding:20px 0;flex-shrink:0;display:flex;flex-direction:column}
+.brand{padding:0 20px 20px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:12px}
+.brand-name{font-size:.9rem;font-weight:700;color:#fff;line-height:1.3}
+.brand-sub{font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:.82rem;color:rgba(255,255,255,.4);cursor:pointer;border-left:3px solid transparent;transition:all .15s}
+.nav-item.on{color:#fff;background:rgba(255,255,255,.05);border-left-color:#4ade80}
+.nav-item:hover:not(.on){color:rgba(255,255,255,.65);background:rgba(255,255,255,.03)}
+.nav-ico{font-size:1rem;width:18px;text-align:center}
+.worker-dot{width:7px;height:7px;border-radius:50%;background:#f87171;flex-shrink:0;margin-left:auto}
+.worker-dot.on{background:#4ade80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sidebar-foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,.07)}
+.logout-btn{width:100%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;padding:8px;border-radius:7px;font-size:.78rem;cursor:pointer;transition:all .15s}
+.logout-btn:hover{background:rgba(239,68,68,.2)}
+
+.main{flex:1;overflow-y:auto;padding:28px 32px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.page-title{font-size:1.25rem;font-weight:700;color:#fff}
+.page-sub{font-size:.75rem;color:rgba(255,255,255,.35);margin-top:3px}
+.save-btn{background:#4ade80;color:#0a1a0f;border:none;padding:10px 22px;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px}
+.save-btn:hover{background:#22c55e;transform:translateY(-1px)}
+.save-btn:active{transform:none}
+.save-btn:disabled{background:rgba(74,222,128,.3);cursor:not-allowed;transform:none}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:#161b26;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px}
+.stat-lbl{font-size:.67rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px}
+.stat-val{font-size:1.4rem;font-weight:800;color:#fff}
+.stat-note{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:3px}
+
+.section-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-title{font-size:.92rem;font-weight:700;color:#fff}
+.badge{font-size:.62rem;background:rgba(74,222,128,.12);color:#4ade80;padding:3px 9px;border-radius:20px;font-weight:600}
+
+.rooms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:24px}
+.room-card{background:#161b26;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;transition:border-color .2s}
+.room-card:hover{border-color:rgba(74,222,128,.25)}
+.rh{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.rt{font-size:.85rem;font-weight:700;color:#fff}
+.rc{font-size:.7rem;color:rgba(255,255,255,.3);margin-top:2px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld label{font-size:.65rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px}
+.iw{position:relative}
+.iw .sym{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:.8rem;color:rgba(255,255,255,.3);pointer-events:none}
+.iw .pct{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:.8rem;color:rgba(255,255,255,.3);pointer-events:none}
+.iw input{width:100%;background:#0f1117;border:1px solid rgba(255,255,255,.09);color:#fff;padding:8px 9px 8px 22px;border-radius:7px;font-size:.85rem;font-weight:600;outline:none;transition:border-color .15s;appearance:none;-moz-appearance:textfield}
+.iw input::-webkit-outer-spin-button,.iw input::-webkit-inner-spin-button{-webkit-appearance:none}
+.iw input:focus{border-color:#4ade80}
+.iw input.no-sym{padding-left:9px;padding-right:24px}
+.disc-preview{font-size:.7rem;color:#fbbf24;margin-top:3px;min-height:15px}
+
+.common-card{background:#161b26;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;margin-bottom:24px}
+.common-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:14px 0}
+.tog-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.tog-row:last-child{border-bottom:none}
+.tog-lbl{font-size:.82rem;color:rgba(255,255,255,.65)}
+.tog-sub{font-size:.68rem;color:rgba(255,255,255,.28);margin-top:2px}
+.sw{position:relative;width:40px;height:22px;flex-shrink:0}
+.sw input{opacity:0;width:0;height:0;position:absolute}
+.sw-t{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:11px;cursor:pointer;transition:.2s}
+.sw-t::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;background:rgba(255,255,255,.4);border-radius:50%;transition:.2s}
+.sw input:checked+.sw-t{background:#4ade80}
+.sw input:checked+.sw-t::after{transform:translateX(18px);background:#fff}
+
+.toast{position:fixed;bottom:20px;right:20px;padding:11px 18px;border-radius:9px;font-size:.82rem;font-weight:600;transform:translateY(60px);opacity:0;transition:all .3s;z-index:9999;pointer-events:none}
+.toast.ok{background:#1a2e1a;border:1px solid rgba(74,222,128,.35);color:#4ade80}
+.toast.err{background:#2e1a1a;border:1px solid rgba(248,113,113,.35);color:#f87171}
+.toast.show{transform:none;opacity:1}
+
+@media(max-width:680px){
+  .sidebar{display:none}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .rooms-grid{grid-template-columns:1fr}
+  .common-grid{grid-template-columns:1fr 1fr}
+  .main{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-ico">🏨</div>
+    <div class="login-title">Hotel Shri Amarnath Lodge</div>
+    <div class="login-sub">Admin Panel — Sirf authorized access</div>
+    <div class="login-worker-row">
+      <label>Worker URL</label>
+      <input type="text" id="login-url" placeholder="https://hotel-prices-api.xxx.workers.dev"/>
+    </div>
+    <br/>
+    <input type="password" id="login-pin" placeholder="Admin PIN daalo" maxlength="20"/>
+    <button class="login-btn" onclick="doLogin()">Login →</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- ══ MAIN SHELL ══ -->
+<div class="shell" id="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">Hotel Shri Amarnath Lodge</div>
+      <div class="brand-sub">Admin Panel</div>
+    </div>
+    <div class="nav-item on"><span class="nav-ico">💰</span> Prices & Discount</div>
+    <div class="nav-item"><span class="nav-ico">☁️</span> Worker Status <span class="worker-dot" id="sidebar-dot"></span></div>
+    <div class="sidebar-foot">
+      <button class="logout-btn" onclick="doLogout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="page-title">💰 Prices & Discounts</div>
+        <div class="page-sub" id="last-saved">Abhi tak save nahi kiya</div>
+      </div>
+      <button class="save-btn" id="save-btn" onclick="saveAll()">
+        <span id="save-ico">💾</span>
+        <span id="save-txt">Save to Cloudflare</span>
+      </button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-lbl">Avg Room Price</div><div class="stat-val" id="st-avg">₹0</div><div class="stat-note">4 room types</div></div>
+      <div class="stat-card"><div class="stat-lbl">Breakfast Price</div><div class="stat-val" id="st-bfst">₹0</div><div class="stat-note">per person/night</div></div>
+      <div class="stat-card"><div class="stat-lbl">Extra Person</div><div class="stat-val" id="st-extra">₹0</div><div class="stat-note">above base guests</div></div>
+      <div class="stat-card"><div class="stat-lbl">Max Discount</div><div class="stat-val" id="st-disc">0%</div><div class="stat-note">across all rooms</div></div>
+    </div>
+
+    <div class="section-hd">
+      <div class="section-title">🛏️ Room Prices</div>
+      <span class="badge">4 ROOMS</span>
+    </div>
+    <div class="rooms-grid" id="rooms-grid"></div>
+
+    <div class="section-hd">
+      <div class="section-title">⚙️ Common Settings</div>
+    </div>
+    <div class="common-card">
+      <div class="common-grid">
+        <div class="fld">
+          <label>Breakfast Price (per person/night)</label>
+          <div class="iw"><span class="sym">₹</span>
+            <input type="number" id="c-bfst" value="170" min="0" step="10" oninput="updateStats()"/>
+          </div>
+        </div>
+        <div class="fld">
+          <label>Extra Person Charge (per night)</label>
+          <div class="iw"><span class="sym">₹</span>
+            <input type="number" id="c-extra" value="500" min="0" step="50" oninput="updateStats()"/>
+          </div>
+        </div>
+        <div class="fld">
+          <label>GST Rate</label>
+          <div class="iw"><input class="no-sym" type="number" id="c-gst" value="5" min="0" max="28"/><span class="pct">%</span></div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div class="tog-row">
+        <div><div class="tog-lbl">🍳 Breakfast Option Visible</div><div class="tog-sub">Modal mein breakfast checkbox dikhao</div></div>
+        <label class="sw"><input type="checkbox" id="t-bfst" checked/><span class="sw-t"></span></label>
+      </div>
+      <div class="tog-row">
+        <div><div class="tog-lbl">💑 Couples Welcome Badge</div><div class="tog-sub">Room info mein couples welcome show karo</div></div>
+        <label class="sw"><input type="checkbox" id="t-couples" checked/><span class="sw-t"></span></label>
+      </div>
+      <div class="tog-row">
+        <div><div class="tog-lbl">🚫 Booking Closed (Kill Switch)</div><div class="tog-sub">Sab rooms ke liye booking band karo</div></div>
+        <label class="sw"><input type="checkbox" id="t-kill"/><span class="sw-t"></span></label>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ROOMS_DEF = [
+  {id:'double', type:'Super Deluxe Double Bed', ico:'🛏️', cap:'2 Adults · King Double', bg:'rgba(74,222,128,.1)',  price:2500, mrp:2500, disc:0},
+  {id:'four',   type:'Super Deluxe Four Bed',   ico:'🏠', cap:'4 Adults · 4 Beds',    bg:'rgba(96,165,250,.1)',  price:3499, mrp:3499, disc:0},
+  {id:'triple', type:'Super Deluxe Triple Bed', ico:'🛎️', cap:'3 Adults · 3 Beds',    bg:'rgba(251,191,36,.1)', price:2999, mrp:2999, disc:0},
+  {id:'family', type:'Family Suite — 2 Rooms',  ico:'👨‍👩‍👧‍👦',cap:'4 Adults · 2 Rooms',   bg:'rgba(192,132,252,.1)',price:3999, mrp:3999, disc:0},
+];
+
+let WORKER_URL='', ADMIN_PIN='';
+
+// ── LOGIN ──
+async function doLogin(){
+  const url = document.getElementById('login-url').value.trim().replace(/\/$/,'');
+  const pin = document.getElementById('login-pin').value.trim();
+  const errEl = document.getElementById('login-err');
+  if(!url||!pin){errEl.textContent='URL aur PIN dono chahiye!'; return;}
+  errEl.textContent='Connecting...';
+  try{
+    const res = await fetch(url+'/health');
+    if(!res.ok) throw new Error('Worker ne error diya');
+    WORKER_URL=url; ADMIN_PIN=pin;
+    localStorage.setItem('hsal_url',url);
+    localStorage.setItem('hsal_pin',pin);
+    showApp();
+    loadFromWorker();
+  }catch(e){
+    errEl.textContent='Worker se connect nahi hua. URL check karo.';
+  }
+}
+
+function doLogout(){
+  localStorage.removeItem('hsal_url');
+  localStorage.removeItem('hsal_pin');
+  document.getElementById('shell').classList.remove('on');
+  document.getElementById('login-screen').style.display='flex';
+}
+
+function showApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('shell').classList.add('on');
+  document.getElementById('sidebar-dot').classList.add('on');
+  buildRooms();
+  updateStats();
+}
+
+// ── AUTO-LOGIN if saved ──
+window.addEventListener('DOMContentLoaded',()=>{
+  const url=localStorage.getItem('hsal_url');
+  const pin=localStorage.getItem('hsal_pin');
+  if(url&&pin){
+    WORKER_URL=url; ADMIN_PIN=pin;
+    document.getElementById('login-url').value=url;
+    document.getElementById('login-pin').value=pin;
+    showApp();
+    loadFromWorker();
+  }
+});
+
+// ── LOAD FROM WORKER ──
+async function loadFromWorker(){
+  try{
+    const res=await fetch(WORKER_URL+'/prices');
+    const data=await res.json();
+    ROOMS_DEF.forEach(r=>{
+      if(data[r.id]){
+        const d=data[r.id];
+        document.getElementById('p-'+r.id).value=d.price||r.price;
+        document.getElementById('m-'+r.id).value=d.mrp||d.price||r.price;
+        document.getElementById('d-'+r.id).value=d.discount||d.disc||0;
+        updateDiscPreview(r.id);
+      }
+    });
+    if(data.common){
+      const c=data.common;
+      if(c.bfst!==undefined) document.getElementById('c-bfst').value=c.bfst;
+      if(c.extra!==undefined) document.getElementById('c-extra').value=c.extra;
+      if(c.gst!==undefined) document.getElementById('c-gst').value=c.gst;
+      if(c.bookingOpen!==undefined) document.getElementById('t-kill').checked=!c.bookingOpen;
+      if(c.breakfastVisible!==undefined) document.getElementById('t-bfst').checked=c.breakfastVisible;
+      if(c.couplesWelcome!==undefined) document.getElementById('t-couples').checked=c.couplesWelcome;
+    }
+    updateStats();
+    showToast('✅ Live prices load ho gaye!','ok');
+  }catch(e){
+    showToast('⚠️ Prices load nahi hua — default values use ho rahi hain','err');
+  }
+}
+
+// ── BUILD ROOM CARDS ──
+function buildRooms(){
+  document.getElementById('rooms-grid').innerHTML = ROOMS_DEF.map(r=>`
+    <div class="room-card">
+      <div class="rh">
+        <div class="rico" style="background:${r.bg}">${r.ico}</div>
+        <div><div class="rt">${r.type}</div><div class="rc">${r.cap}</div></div>
+      </div>
+      <div class="fr">
+        <div class="fld">
+          <label>Net Price / Night</label>
+          <div class="iw"><span class="sym">₹</span>
+            <input type="number" id="p-${r.id}" value="${r.price}" min="0" step="50" oninput="onPriceChange('${r.id}')"/>
+          </div>
+        </div>
+        <div class="fld">
+          <label>MRP (Strikethrough)</label>
+          <div class="iw"><span class="sym">₹</span>
+            <input type="number" id="m-${r.id}" value="${r.mrp}" min="0" step="50" oninput="onMrpChange('${r.id}')"/>
+          </div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fld">
+          <label>Discount %</label>
+          <div class="iw">
+            <input class="no-sym" type="number" id="d-${r.id}" value="0" min="0" max="90" oninput="onDiscChange('${r.id}')"/>
+            <span class="pct">%</span>
+          </div>
+          <div class="disc-preview" id="dp-${r.id}"></div>
+        </div>
+        <div class="fld">
+          <label>Price After Discount</label>
+          <div class="iw"><span class="sym">₹</span>
+            <input type="number" id="net-${r.id}" value="${r.price}" min="0" step="50" oninput="onNetChange('${r.id}')" style="color:#4ade80"/>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── PRICE LOGIC ──
+function onPriceChange(id){
+  recalcFromPrice(id);
+  updateStats();
+}
+function onMrpChange(id){
+  const p=val('p-'+id), m=val('m-'+id);
+  if(m>p){
+    const d=Math.round((m-p)/m*100);
+    set('d-'+id,d);
+    set('net-'+id,p);
+  } else {
+    set('d-'+id,0); set('net-'+id,p);
+  }
+  updateDiscPreview(id); updateStats();
+}
+function onDiscChange(id){
+  const p=val('p-'+id), d=val('d-'+id);
+  if(d>0){
+    const mrp=Math.round(p/(1-d/100));
+    set('m-'+id,mrp); set('net-'+id,p);
+  } else {
+    set('m-'+id,p); set('net-'+id,p);
+  }
+  updateDiscPreview(id); updateStats();
+}
+function onNetChange(id){
+  const net=val('net-'+id), m=val('m-'+id);
+  set('p-'+id,net);
+  if(m>net){
+    const d=Math.round((m-net)/m*100);
+    set('d-'+id,d);
+  } else { set('d-'+id,0); set('m-'+id,net); }
+  updateDiscPreview(id); updateStats();
+}
+function recalcFromPrice(id){
+  const p=val('p-'+id), d=val('d-'+id);
+  if(d>0){ set('m-'+id,Math.round(p/(1-d/100))); }
+  set('net-'+id,p);
+  updateDiscPreview(id);
+}
+function updateDiscPreview(id){
+  const p=val('p-'+id), m=val('m-'+id), d=val('d-'+id);
+  const el=document.getElementById('dp-'+id);
+  if(d>0&&m>p) el.textContent=`Guest bachayega ₹${(m-p).toLocaleString('en-IN')} (${d}% OFF)`;
+  else el.textContent='';
+}
+
+// ── STATS ──
+function updateStats(){
+  const prices=ROOMS_DEF.map(r=>val('p-'+r.id));
+  const avg=Math.round(prices.reduce((a,b)=>a+b,0)/prices.length);
+  document.getElementById('st-avg').textContent='₹'+avg.toLocaleString('en-IN');
+  document.getElementById('st-bfst').textContent='₹'+val('c-bfst');
+  document.getElementById('st-extra').textContent='₹'+val('c-extra');
+  const maxDisc=Math.max(...ROOMS_DEF.map(r=>val('d-'+r.id)));
+  document.getElementById('st-disc').textContent=maxDisc+'%';
+}
+
+// ── SAVE ──
+async function saveAll(){
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true;
+  document.getElementById('save-txt').textContent='Saving...';
+  const payload={
+    common:{
+      bfst:val('c-bfst'), extra:val('c-extra'), gst:val('c-gst'),
+      bookingOpen:!document.getElementById('t-kill').checked,
+      breakfastVisible:document.getElementById('t-bfst').checked,
+      couplesWelcome:document.getElementById('t-couples').checked
+    }
+  };
+  ROOMS_DEF.forEach(r=>{
+    payload[r.id]={
+      price:val('p-'+r.id), mrp:val('m-'+r.id),
+      discount:val('d-'+r.id), bfst:val('c-bfst'),
+      extra:val('c-extra'), gst:val('c-gst')
+    };
+  });
+  try{
+    const res=await fetch(WORKER_URL+'/prices',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-admin-pin':ADMIN_PIN},
+      body:JSON.stringify(payload)
+    });
+    const data=await res.json();
+    if(res.ok&&data.ok){
+      showToast('✅ Prices Cloudflare mein save ho gaye! Website live update ho gayi.','ok');
+      const now=new Date().toLocaleTimeString('en-IN');
+      document.getElementById('last-saved').textContent='Last saved: '+now;
+    } else {
+      showToast('❌ Error: '+(data.error||'Unknown error'),'err');
+    }
+  }catch(e){
+    showToast('❌ Worker se connect nahi hua!','err');
+  }
+  btn.disabled=false;
+  document.getElementById('save-txt').textContent='Save to Cloudflare';
+}
+
+// ── HELPERS ──
+function val(id){return parseInt(document.getElementById(id).value)||0;}
+function set(id,v){document.getElementById(id).value=v;}
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast '+type+' show';
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>
