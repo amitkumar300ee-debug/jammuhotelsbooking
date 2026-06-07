@@ -363,7 +363,7 @@ footer b{color:rgba(255,255,255,.6)}
       <div style="display:flex;flex-direction:column;gap:8px;font-size:.82rem;color:var(--txt2)">
         <div style="background:var(--pri-light);border-radius:var(--rs);padding:12px;border-left:4px solid var(--pri)">
           <b style="color:var(--pri)">✅ Advance Payment Required</b><br/>
-          Advance payment is <b>mandatory</b> to confirm your room booking via WhatsApp or phone call. Room will only be reserved after payment is received.
+          <b>50% advance</b> of total room amount is <b>mandatory</b> to confirm your booking via WhatsApp or phone call. Room will only be reserved after advance payment is received.
         </div>
         <div style="background:#fff4ed;border-radius:var(--rs);padding:12px;border-left:4px solid var(--acc)">
           <b style="color:var(--acc)">❌ Non-Refundable Advance</b><br/>
@@ -466,6 +466,7 @@ footer b{color:rgba(255,255,255,.6)}
       <div class="cc-title">📱 Reach Us Instantly</div>
       <div class="cc-item" onclick="quickWA()"><div class="cc-ico wa">💬</div><div><div class="cc-lbl">WhatsApp (Fastest Response)</div><div class="cc-val">+91 8899337265</div></div></div>
       <div class="cc-item" onclick="window.open('tel:+918899337265')"><div class="cc-ico ph">📞</div><div><div class="cc-lbl">Phone Call</div><div class="cc-val">+91 8899337265</div></div></div>
+      <div class="cc-item" onclick="window.open('tel:+919797367265')"><div class="cc-ico ph">📞</div><div><div class="cc-lbl">Alternate Phone</div><div class="cc-val">+91 9797367265</div></div></div>
       <div class="cc-item"><div class="cc-ico em">✉️</div><div><div class="cc-lbl">Email</div><div class="cc-val">0101sunilsharma@gmail.com</div></div></div>
     </div>
 
@@ -518,7 +519,7 @@ footer b{color:rgba(255,255,255,.6)}
       <div style="font-size:.85rem;color:var(--txt2);line-height:2.2">
         <div>🏨 Hotel: <b>24 Hours Open</b></div>
         <div>Check-in: <b>12:00 Noon</b> · Check-out: <b>11:00 AM</b></div>
-        <div>🍳 Breakfast: <b>6:00 AM – 11:00 AM</b></div>
+        <div>🍳 Breakfast: <b>9:00 AM – 11:00 AM</b></div>
         <div>🅿️ Free Parking: <b>Available</b></div>
         <div>🧺 Laundry/Dry Cleaning: <b>Available</b></div>
         <div>🗺️ Tour & Ticket Assistance: <b>Free</b></div>
@@ -558,7 +559,7 @@ footer b{color:rgba(255,255,255,.6)}
     </div>
     <div class="ti">
       <div class="ti-ico">💰</div>
-      <div class="ti-n">₹1,000</div>
+      <div class="ti-n">50%</div>
       <div class="ti-l">Advance Booking</div>
     </div>
     <div class="ti">
@@ -699,7 +700,7 @@ const HOTEL_IMGS = [
 const ROOMS = [
   {
     id:'double', type:'Super Deluxe Double Bed Room', ratingNum:4.7,
-    mrp:2690, discount:30, price:1880, breakfastPrice:170, extraR:500,
+    mrp:0, discount:0, price:2500, breakfastPrice:170, extraR:500,
     basePersons:2,
     cap:'2 Adults · King Double Bed · Super Deluxe',
     ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🍳 Breakfast Option','🅿️ Parking'],
@@ -708,7 +709,7 @@ const ROOMS = [
   },
   {
     id:'four', type:'Super Deluxe Four Bed Room', ratingNum:4.6,
-    mrp:3380, discount:25, price:2500, breakfastPrice:170, extraR:500,
+    mrp:0, discount:0, price:3499, breakfastPrice:170, extraR:500,
     basePersons:4,
     cap:'4 Adults · 4 Beds · Super Deluxe',
     ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🛏️ 4 Beds','🅿️ Parking'],
@@ -717,7 +718,7 @@ const ROOMS = [
   },
   {
     id:'triple', type:'Super Deluxe Triple Bed Room', ratingNum:4.6,
-    mrp:2980, discount:25, price:2200, breakfastPrice:170, extraR:500,
+    mrp:0, discount:0, price:2999, breakfastPrice:170, extraR:500,
     basePersons:3,
     cap:'3 Adults · 3 Beds · Super Deluxe',
     ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🛏️ 3 Beds','🅿️ Parking'],
@@ -726,7 +727,7 @@ const ROOMS = [
   },
   {
     id:'family', type:'Family Suite — 2 Rooms 1 Set', ratingNum:4.8,
-    mrp:3860, discount:25, price:2890, breakfastPrice:170, extraR:500,
+    mrp:0, discount:0, price:3999, breakfastPrice:170, extraR:500,
     basePersons:4,
     cap:'4 Adults · 2 Connecting Rooms',
     ams:['❄️ AC','📶 WiFi','📺 2 Smart TVs','🚿 Hot Water','🏠 2 Rooms','🅿️ Parking'],
@@ -757,7 +758,7 @@ function renderRooms(){
         <button class="rc-img-arr rc-arr-r" onclick="cSlide(${i},1,event)">›</button>
         <div class="rc-dots" id="rcd-${i}">${r.imgs.map((_,d)=>`<button class="rc-dot ${d===0?'on':''}" onclick="cGo(${i},${d},event)"></button>`).join('')}</div>
         <div class="rc-img-count">📷 ${r.imgs.length} Photos</div>
-        <div class="rc-top-badges"><span class="rc-badge deal">🏷️ ${r.discount}% OFF</span></div>
+        <div class="rc-top-badges"></div>
         <button class="rc-like" onclick="this.classList.toggle('on');this.textContent=this.classList.contains('on')?'❤️':'🤍';event.stopPropagation()">🤍</button>
       </div>
       <div class="rc-body">
@@ -767,8 +768,6 @@ function renderRooms(){
         <div class="rc-hi">${r.hi.slice(0,2).map(h=>`<span>${h}</span>`).join('')}</div>
         <div class="rc-footer">
           <div>
-            <div class="rc-mrp">MRP ₹${r.mrp.toLocaleString('en-IN')}</div>
-            <div class="rc-disc">💚 Save ₹${sav.toLocaleString('en-IN')} (${r.discount}% OFF)</div>
             <div class="rc-amt"><span class="sym">₹</span>${r.price.toLocaleString('en-IN')}</div>
             <div class="rc-per">per night / room</div>
             
@@ -810,8 +809,8 @@ function openModal(idx){
   document.getElementById('m-type').textContent=curRoom.type;
   document.getElementById('m-rating').textContent=`⭐ ${curRoom.ratingNum}`;
   document.getElementById('m-loc').innerHTML=`📍 <b>Hotel Shri Amarnath Lodge · Jammu</b> · ${curRoom.cap}`;
-  document.getElementById('m-mrp').textContent=`MRP ₹${curRoom.mrp.toLocaleString('en-IN')}`;
-  document.getElementById('m-disc').textContent=`${curRoom.discount}% OFF`;
+  document.getElementById('m-mrp').textContent='';
+  document.getElementById('m-disc').textContent='';
   document.getElementById('m-net').textContent=curRoom.price.toLocaleString('en-IN');
   
   document.getElementById('m-ams').innerHTML=curRoom.ams.map(a=>`<span class="rc-am">${a}</span>`).join('');
@@ -878,7 +877,6 @@ function calcPrice(){
   const co=document.getElementById('g-co').value||'TBD';
   let rows=`
     <div class="pb-row"><label>Room: ${r.type}</label><span>₹${r.price.toLocaleString('en-IN')}/night</span></div>
-    <div class="pb-row"><label>Discount (${r.discount}% off MRP ₹${r.mrp.toLocaleString('en-IN')})</label><span>Net ₹${r.price.toLocaleString('en-IN')}</span></div>
     <div class="pb-row"><label>Check-in → Check-out</label><span>${ci} → ${co}</span></div>
     <div class="pb-row"><label>Nights</label><span>${n} night${n>1?'s':''}</span></div>
     <div class="pb-row"><label>Total Guests</label><span>${adults} persons</span></div>`;
@@ -903,13 +901,13 @@ function sendWA(){
   const tot=document.getElementById('pb-total').textContent;
   const ref='SAL-'+Math.floor(100000+Math.random()*900000);
   const bfst=r.breakfastPrice&&document.getElementById('bfst-check').checked;
-  const msg=`🛕 *HOTEL SHRI AMARNATH LODGE — ROOM BOOKING*\n━━━━━━━━━━━━━━━━━━━━━\n🔖 *Ref:* ${ref}\n\n👤 *GUEST DETAILS*\n   Name     : ${name}\n   Phone    : ${phone}\n   City     : ${city}\n\n🏨 *ROOM DETAILS*\n   Hotel    : Hotel Shri Amarnath Lodge, Jammu\n   Room     : ${r.type}\n   MRP      : ₹${r.mrp.toLocaleString('en-IN')} → *Net ₹${r.price.toLocaleString('en-IN')}* (${r.discount}% OFF)\n   Max Persons : ${r.maxPersons}\n   ${bfst?'🍳 Breakfast: Included':''}\n   Check-in : ${ci}\n   Check-out: ${co}\n   Nights   : ${n}\n\n👥 *GUESTS*\n   Total Guests : ${adults} persons\n   ${extraAdults>0?'Extra Persons: '+extraAdults+' × ₹'+r.extraR+'/night':'All within base capacity'}\n\n📝 *Special Request:* ${note}\n\n💰 *TOTAL : ${tot}* (incl. 5% GST)\n━━━━━━━━━━━━━━━━━━━━━\nKindly confirm availability. Thank you! 🙏`;
+  const msg=`🛕 *HOTEL SHRI AMARNATH LODGE — ROOM BOOKING*\n━━━━━━━━━━━━━━━━━━━━━\n🔖 *Ref:* ${ref}\n\n👤 *GUEST DETAILS*\n   Name     : ${name}\n   Phone    : ${phone}\n   City     : ${city}\n\n🏨 *ROOM DETAILS*\n   Hotel    : Hotel Shri Amarnath Lodge, Jammu\n   Room     : ${r.type}\n   Price    : *₹${r.price.toLocaleString('en-IN')}/night*\n   Max Persons : ${r.maxPersons}\n   ${bfst?'🍳 Breakfast: Included':''}\n   Check-in : ${ci}\n   Check-out: ${co}\n   Nights   : ${n}\n\n👥 *GUESTS*\n   Total Guests : ${adults} persons\n   ${extraAdults>0?'Extra Persons: '+extraAdults+' × ₹'+r.extraR+'/night':'All within base capacity'}\n\n📝 *Special Request:* ${note}\n\n💰 *TOTAL : ${tot}* (incl. 5% GST)\n━━━━━━━━━━━━━━━━━━━━━\nKindly confirm availability. Thank you! 🙏`;
   // ← APNA WHATSAPP NUMBER YAHAN DALO (91 ke baad number)
   window.open('https://wa.me/918899337265?text='+encodeURIComponent(msg),'_blank');
 }
 
 function quickRoomWA(type,price,mrp,disc){
-  const msg=`🛕 *Hotel Shri Amarnath Lodge — Room Inquiry*\n\nHello! I want to book:\n*${type}*\nMRP: ₹${mrp.toLocaleString('en-IN')} → *Net: ₹${price.toLocaleString('en-IN')}* (${disc}% OFF)\n\nPlease share availability. Thanks! 🙏`;
+  const msg=`🛕 *Hotel Shri Amarnath Lodge — Room Inquiry*\n\nHello! I want to book:\n*${type}*\nPrice: *₹${price.toLocaleString('en-IN')}/night*\n\nPlease share availability. Thanks! 🙏`;
   window.open('https://wa.me/918899337265?text='+encodeURIComponent(msg),'_blank');
 }
 function quickWA(){
