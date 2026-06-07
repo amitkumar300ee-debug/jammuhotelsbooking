@@ -696,6 +696,39 @@ const HOTEL_IMGS = [
   { src:'hotel-lobby-3.jpg',    label:'🛋️ Lobby Entrance' },
 ];
 
+// ══ LIVE PRICE WORKER ══
+const WORKER_URL = 'WORKER_URL_PLACEHOLDER';
+
+async function loadLivePrices(){
+  try{
+    const res  = await fetch(WORKER_URL+'/prices');
+    if(!res.ok) return;
+    const live = await res.json();
+    ROOMS.forEach(room=>{
+      const d=live[room.id];
+      if(!d) return;
+      room.price          = d.price          || room.price;
+      room.mrp            = d.mrp            || 0;
+      room.discount       = d.discount       || 0;
+      room.breakfastPrice = d.bfst           || room.breakfastPrice;
+      room.extraR         = d.extra          || room.extraR;
+    });
+    if(live.common){
+      const c=live.common;
+      if(c.bookingOpen===false){
+        setTimeout(()=>{
+          document.querySelectorAll('.rc-view-btn,.rc-wa-btn,.action-wa,.hdr-wa')
+            .forEach(b=>{b.disabled=true;b.style.opacity='.4';b.style.cursor='not-allowed';});
+          document.querySelectorAll('.rc-view-btn').forEach(b=>b.textContent='🚫 Booking Closed');
+        },500);
+      }
+    }
+    renderRooms();
+  }catch(e){
+    console.log('Price worker offline — default prices active');
+  }
+}
+
 // ══ ROOM DATA ══
 const ROOMS = [
   {
@@ -956,6 +989,7 @@ function lbSlide(d){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
+  loadLivePrices();
   renderHotelGallery();
   renderRooms();
   const t=new Date(),tm=new Date(t);
