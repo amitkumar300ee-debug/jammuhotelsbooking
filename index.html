@@ -639,7 +639,7 @@ footer b{color:rgba(255,255,255,.6)}
       <div class="rc-hi" id="m-hi" style="margin-bottom:14px"></div>
 
       <div class="bfst-row" id="bfst-toggle-row" style="display:none">
-        <label><input type="checkbox" id="bfst-check" onchange="calcPrice()"/>🍳 Add Breakfast (+₹170/per person)</label>
+        <label><input type="checkbox" id="bfst-check" onchange="calcPrice()"/>🍳 Add Breakfast (+₹<span id="bfst-price-label">170</span>/per person)</label>
       </div>
 
       <div class="person-section">
@@ -844,6 +844,8 @@ function openModal(idx){
   const bRow=document.getElementById('bfst-toggle-row');
   const bChk=document.getElementById('bfst-check');
   bRow.style.display=curRoom.breakfastPrice?'flex':'none';
+  const bfstLabel=document.getElementById('bfst-price-label');
+  if(bfstLabel) bfstLabel.textContent=curRoom.breakfastPrice||170;
   bChk.checked=false;
   const imgs=curRoom.imgs;
   mgIdx=0;mgTotal=imgs.length;
