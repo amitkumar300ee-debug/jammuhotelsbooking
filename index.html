@@ -791,7 +791,7 @@ function renderRooms(){
         <button class="rc-img-arr rc-arr-r" onclick="cSlide(${i},1,event)">›</button>
         <div class="rc-dots" id="rcd-${i}">${r.imgs.map((_,d)=>`<button class="rc-dot ${d===0?'on':''}" onclick="cGo(${i},${d},event)"></button>`).join('')}</div>
         <div class="rc-img-count">📷 ${r.imgs.length} Photos</div>
-        <div class="rc-top-badges"></div>
+        <div class="rc-top-badges">${r.discount>0?`<span style="background:#dc2626;color:#fff;font-size:.62rem;font-weight:800;padding:4px 8px;border-radius:5px;letter-spacing:.3px">${r.discount}% OFF</span>`:''}</div>
         <button class="rc-like" onclick="this.classList.toggle('on');this.textContent=this.classList.contains('on')?'❤️':'🤍';event.stopPropagation()">🤍</button>
       </div>
       <div class="rc-body">
@@ -801,9 +801,10 @@ function renderRooms(){
         <div class="rc-hi">${r.hi.slice(0,2).map(h=>`<span>${h}</span>`).join('')}</div>
         <div class="rc-footer">
           <div>
+            ${r.mrp>r.price?`<div class="rc-mrp">₹${r.mrp.toLocaleString('en-IN')}</div>`:''}
+            ${r.discount>0?`<div class="rc-disc">🏷️ ${r.discount}% OFF</div>`:''}
             <div class="rc-amt"><span class="sym">₹</span>${r.price.toLocaleString('en-IN')}</div>
             <div class="rc-per">per night / room</div>
-            
             ${r.extraR>0?`<div class="rc-extra">+₹${r.extraR.toLocaleString('en-IN')} extra person</div>`:''}
           </div>
           <div class="rc-btns">
@@ -842,8 +843,8 @@ function openModal(idx){
   document.getElementById('m-type').textContent=curRoom.type;
   document.getElementById('m-rating').textContent=`⭐ ${curRoom.ratingNum}`;
   document.getElementById('m-loc').innerHTML=`📍 <b>Hotel Shri Amarnath Lodge · Jammu</b> · ${curRoom.cap}`;
-  document.getElementById('m-mrp').textContent='';
-  document.getElementById('m-disc').textContent='';
+  document.getElementById('m-mrp').textContent=curRoom.mrp>curRoom.price?'₹'+curRoom.mrp.toLocaleString('en-IN'):'';
+  document.getElementById('m-disc').textContent=curRoom.discount>0?curRoom.discount+'% OFF':'';
   document.getElementById('m-net').textContent=curRoom.price.toLocaleString('en-IN');
   
   document.getElementById('m-ams').innerHTML=curRoom.ams.map(a=>`<span class="rc-am">${a}</span>`).join('');
