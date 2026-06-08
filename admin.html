@@ -95,6 +95,19 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e8eaf
 .toast.ok{background:#1a2e1a;border:1px solid rgba(74,222,128,.35);color:#4ade80}
 .toast.err{background:#2e1a1a;border:1px solid rgba(248,113,113,.35);color:#f87171}
 .toast.show{transform:none;opacity:1}
+.pin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9998;display:none;align-items:center;justify-content:center}
+.pin-overlay.show{display:flex}
+.pin-modal{background:#161b26;border:1px solid rgba(74,222,128,.3);border-radius:16px;padding:28px;width:100%;max-width:320px;text-align:center}
+.pin-modal-ico{font-size:2rem;margin-bottom:8px}
+.pin-modal-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.pin-modal-sub{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:16px}
+.pin-modal input{width:100%;background:#0f1117;border:1px solid rgba(255,255,255,.12);color:#fff;padding:12px;border-radius:8px;font-size:1.1rem;text-align:center;letter-spacing:6px;outline:none;margin-bottom:12px}
+.pin-modal input:focus{border-color:#4ade80}
+.pin-modal-btns{display:flex;gap:8px}
+.pin-confirm-btn{flex:1;background:#4ade80;color:#0a1a0f;border:none;padding:11px;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer}
+.pin-confirm-btn:hover{background:#22c55e}
+.pin-cancel-btn{flex:1;background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);padding:11px;border-radius:8px;font-size:.88rem;cursor:pointer}
+.pin-err{font-size:.72rem;color:#f87171;margin-top:6px;min-height:16px}
 
 @media(max-width:680px){
   .sidebar{display:none}
@@ -113,12 +126,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e8eaf
     <div class="login-ico">🏨</div>
     <div class="login-title">Hotel Shri Amarnath Lodge</div>
     <div class="login-sub">Admin Panel — Sirf authorized access</div>
-    <div class="login-worker-row">
-      <label>Worker URL</label>
-      <input type="text" id="login-url" placeholder="https://hotel-prices-api.xxx.workers.dev"/>
-    </div>
-    <br/>
-    <input type="password" id="login-pin" placeholder="Admin PIN daalo" maxlength="20"/>
+    <input type="password" id="login-pin" placeholder="Enter Admin PIN" maxlength="20" onkeydown="if(event.key==='Enter')doLogin()"/>
     <button class="login-btn" onclick="doLogin()">Login →</button>
     <div class="login-err" id="login-err"></div>
   </div>
@@ -202,6 +210,19 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e8eaf
   </main>
 </div>
 
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-modal">
+    <div class="pin-modal-ico">🔐</div>
+    <div class="pin-modal-title">Confirm PIN to Save</div>
+    <div class="pin-modal-sub">Enter your Admin PIN to apply price changes</div>
+    <input type="password" id="confirm-pin-inp" placeholder="••••••••" maxlength="20" onkeydown="if(event.key==='Enter')confirmSave()"/>
+    <div class="pin-err" id="pin-modal-err"></div>
+    <div class="pin-modal-btns">
+      <button class="pin-cancel-btn" onclick="closePinModal()">Cancel</button>
+      <button class="pin-confirm-btn" onclick="confirmSave()">✅ Confirm & Save</button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -212,7 +233,7 @@ const ROOMS_DEF = [
   {id:'family', type:'Family Suite — 2 Rooms',  ico:'👨‍👩‍👧‍👦',cap:'4 Adults · 2 Rooms',   bg:'rgba(192,132,252,.1)',price:3999, mrp:3999, disc:0},
 ];
 
-let WORKER_URL='', ADMIN_PIN='';
+let WORKER_URL='https://hotel-prices-api.amitkumar300ee.workers.dev', ADMIN_PIN='', SAVE_PIN_VERIFIED='';
 
 // ── LOGIN ──
 let LOGIN_ATTEMPTS = 0;
@@ -222,10 +243,10 @@ async function doLogin(){
     document.querySelector('.login-btn').disabled=true;
     return;
   }
-  const url = document.getElementById('login-url').value.trim().replace(/\/$/,'');
+  const url = WORKER_URL;
   const pin = document.getElementById('login-pin').value.trim();
   const errEl = document.getElementById('login-err');
-  if(!url||!pin){errEl.textContent='URL aur PIN dono chahiye!'; return;}
+  if(!pin){errEl.textContent='Please enter your PIN!'; return;}
   errEl.textContent='Verifying...';
   document.querySelector('.login-btn').disabled=true;
   try{
@@ -422,7 +443,48 @@ function updateStats(){
 }
 
 // ── SAVE ──
-async function saveAll(){
+function saveAll(){
+  // PIN modal open karo
+  document.getElementById('confirm-pin-inp').value='';
+  document.getElementById('pin-modal-err').textContent='';
+  document.getElementById('pin-overlay').classList.add('show');
+  setTimeout(()=>document.getElementById('confirm-pin-inp').focus(),100);
+}
+
+function closePinModal(){
+  document.getElementById('pin-overlay').classList.remove('show');
+}
+
+async function confirmSave(){
+  const confirmPin = document.getElementById('confirm-pin-inp').value.trim();
+  const errEl = document.getElementById('pin-modal-err');
+  if(!confirmPin){errEl.textContent='PIN daalo!'; return;}
+  document.querySelector('.pin-confirm-btn').disabled=true;
+  document.querySelector('.pin-confirm-btn').textContent='Verifying...';
+  try{
+    const res = await fetch(WORKER_URL+'/verify-save-pin',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-save-pin':confirmPin}
+    });
+    const data = await res.json();
+    if(!res.ok||!data.ok){
+      errEl.textContent='❌ Wrong PIN! Try again.';
+      document.getElementById('confirm-pin-inp').value='';
+      document.querySelector('.pin-confirm-btn').disabled=false;
+      document.querySelector('.pin-confirm-btn').textContent='✅ Confirm & Save';
+      return;
+    }
+    SAVE_PIN_VERIFIED = confirmPin;
+    closePinModal();
+    await doSave();
+  }catch(e){
+    errEl.textContent='❌ Worker se connect nahi hua!';
+    document.querySelector('.pin-confirm-btn').disabled=false;
+    document.querySelector('.pin-confirm-btn').textContent='✅ Confirm & Save';
+  }
+}
+
+async function doSave(){
   const btn=document.getElementById('save-btn');
   btn.disabled=true;
   document.getElementById('save-txt').textContent='Saving...';
@@ -444,7 +506,7 @@ async function saveAll(){
   try{
     const res=await fetch(WORKER_URL+'/prices',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-admin-pin':ADMIN_PIN},
+      headers:{'Content-Type':'application/json','x-admin-pin':ADMIN_PIN,'x-save-pin':SAVE_PIN_VERIFIED},
       body:JSON.stringify(payload)
     });
     const data=await res.json();
