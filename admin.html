@@ -194,18 +194,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e8eaf
         </div>
       </div>
       <hr class="divider"/>
-      <div class="tog-row">
-        <div><div class="tog-lbl">🍳 Breakfast Option Visible</div><div class="tog-sub">Modal mein breakfast checkbox dikhao</div></div>
-        <label class="sw"><input type="checkbox" id="t-bfst" checked/><span class="sw-t"></span></label>
-      </div>
+
       <div class="tog-row">
         <div><div class="tog-lbl">💑 Couples Welcome Badge</div><div class="tog-sub">Room info mein couples welcome show karo</div></div>
         <label class="sw"><input type="checkbox" id="t-couples" checked/><span class="sw-t"></span></label>
       </div>
-      <div class="tog-row">
-        <div><div class="tog-lbl">🚫 Booking Closed (Kill Switch)</div><div class="tog-sub">Sab rooms ke liye booking band karo</div></div>
-        <label class="sw"><input type="checkbox" id="t-kill"/><span class="sw-t"></span></label>
-      </div>
+
     </div>
   </main>
 </div>
@@ -331,8 +325,6 @@ async function loadFromWorker(){
       if(c.bfst!==undefined) document.getElementById('c-bfst').value=c.bfst;
       if(c.extra!==undefined) document.getElementById('c-extra').value=c.extra;
       if(c.gst!==undefined) document.getElementById('c-gst').value=c.gst;
-      if(c.bookingOpen!==undefined) document.getElementById('t-kill').checked=!c.bookingOpen;
-      if(c.breakfastVisible!==undefined) document.getElementById('t-bfst').checked=c.breakfastVisible;
       if(c.couplesWelcome!==undefined) document.getElementById('t-couples').checked=c.couplesWelcome;
     }
     updateStats();
@@ -491,8 +483,6 @@ async function doSave(){
   const payload={
     common:{
       bfst:val('c-bfst'), extra:val('c-extra'), gst:val('c-gst'),
-      bookingOpen:!document.getElementById('t-kill').checked,
-      breakfastVisible:document.getElementById('t-bfst').checked,
       couplesWelcome:document.getElementById('t-couples').checked
     }
   };
