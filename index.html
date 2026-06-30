@@ -628,101 +628,7 @@ footer b{color:rgba(255,255,255,.6)}
   <div class="lb-lbl" id="lb-lbl"></div>
 </div>
 
-<!-- MODAL -->
-<div class="modal-bg" id="room-modal">
-  <div class="modal">
-    <div class="modal-topbar">
-      <button class="modal-back" onclick="closeModal()">←</button>
-      <div class="modal-topbar-title" id="m-type-top">Room Details</div>
-    </div>
-    <div class="modal-gallery">
-      <div class="mg-slides" id="mg-slides"></div>
-      <button class="mg-arrow mg-al" onclick="mgSlide(-1)">‹</button>
-      <button class="mg-arrow mg-ar" onclick="mgSlide(1)">›</button>
-      <div class="mg-dots" id="mg-dots"></div>
-      <div class="mg-counter" id="mg-counter">1 / 8</div>
-    </div>
-    <div class="modal-body">
-      <div class="mb-top">
-        <div class="mb-type" id="m-type">Room Type</div>
-        <div class="mb-rating" id="m-rating">⭐ 4.7</div>
-      </div>
-      <div class="mb-loc" id="m-loc">📍 Hotel Shri Amarnath Lodge · Jammu</div>
-      <div class="mb-price-strip">
-        <div>
-          <div class="mb-mrp-row">
-            <span class="mb-mrp" id="m-mrp">₹0</span>
-            <span class="mb-disc-badge" id="m-disc">0% OFF</span>
-          </div>
-          <div style="color:rgba(255,255,255,.55);font-size:.65rem;margin-bottom:2px">Net Price / Night</div>
-          <div class="mb-net-price"><span class="sym">₹</span><span id="m-net">0</span></div>
-        </div>
-        <div style="text-align:right">
-          <div class="mb-per">per room / night</div>
-        </div>
-      </div>
-      <div class="rc-ams" id="m-ams" style="margin-bottom:12px"></div>
-      <div class="rc-hi" id="m-hi" style="margin-bottom:14px"></div>
-
-      <div class="bfst-row" id="bfst-toggle-row" style="display:none">
-        <label><input type="checkbox" id="bfst-check" onchange="calcPrice()"/>🍳 Add Breakfast (+₹<span id="bfst-price-label">170</span>/per person)</label>
-      </div>
-
-      <div class="person-section">
-        <div class="ps-title">👥 Select Guests & Nights</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="ps-item">
-            <div class="ps-label">👤 Total Adults</div>
-            <div class="ps-sub" id="cap-note" style="color:var(--acc);font-weight:600">Max — persons</div>
-            <div class="ps-counter">
-              <button class="ps-btn" onclick="pAdj2('adults',-1)">−</button>
-              <div class="ps-num" id="p-adults">2</div>
-              <button class="ps-btn" onclick="pAdj2('adults',1)">+</button>
-            </div>
-            <div class="ps-tag charge" id="extra-tag">+₹500/extra person</div>
-          </div>
-          <div class="ps-item">
-            <div class="ps-label">🌙 Nights</div>
-            <div class="ps-sub">Auto from<br/>check-in/out</div>
-            <div class="ps-counter">
-              <button class="ps-btn" onclick="pAdj2('nights',-1)">−</button>
-              <div class="ps-num" id="p-nights">1</div>
-              <button class="ps-btn" onclick="pAdj2('nights',1)">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="price-box">
-        <div class="pb-rows" id="pb-rows"><div class="pb-row"><label>Select guests above</label><span>—</span></div></div>
-        <div class="pb-total">
-          <div class="pb-total-label">Total Payable</div>
-          <div class="pb-total-amt" id="pb-total">₹0</div>
-        </div>
-      </div>
-
-      <div class="guest-info">
-        <div class="gi-row">
-          <div class="gi-f"><label>Your Name *</label><input type="text" id="g-name" placeholder="Full name"/></div>
-          <div class="gi-f"><label>WhatsApp Number *</label><input type="tel" id="g-phone" placeholder="Your WhatsApp number"/></div>
-          <div class="gi-f"><label>Check-in Date</label><input type="date" id="g-ci" oninput="syncNights()"/></div>
-          <div class="gi-f"><label>Check-out Date</label><input type="date" id="g-co" oninput="syncNights()"/></div>
-          <div class="gi-f"><label>City / State</label><input type="text" id="g-city" placeholder="Delhi, Mumbai..."/></div>
-          <div class="gi-f"><label>Special Request</label><input type="text" id="g-note" placeholder="Any request..."/></div>
-        </div>
-      </div>
-
-      <div class="modal-actions">
-        <button class="action-wa" onclick="sendWA()">💬 Send Booking on WhatsApp</button>
-        <button class="action-call" onclick="window.open('tel:+918899337265')">📞 Call Now</button>
-      </div>
-      <div class="wa-note">Room details, guests, dates & price breakdown will be sent as WhatsApp message to Hotel Shri Amarnath Lodge.</div>
-    </div>
-  </div>
-</div>
-
+<script src="room-data.js"></script>
 <script>
 // ══ HOTEL GALLERY IMAGES ══
 const HOTEL_IMGS = [
@@ -733,78 +639,19 @@ const HOTEL_IMGS = [
   { src:'hotel-lobby-3.jpg',    label:'🛋️ Lobby Entrance' },
 ];
 
-// ══ LIVE PRICE WORKER ══
-const WORKER_URL = 'https://hotel-prices-api.vijayweb2024.workers.dev';
-
 async function loadLivePrices(){
-  try{
-    const res  = await fetch(WORKER_URL+'/prices');
-    if(!res.ok) return;
-    const live = await res.json();
-    ROOMS.forEach(room=>{
-      const d=live[room.id];
-      if(!d) return;
-      room.price          = d.price          || room.price;
-      room.mrp            = d.mrp            || 0;
-      room.discount       = d.discount       || 0;
-      room.breakfastPrice = d.bfst           || room.breakfastPrice;
-      room.extraR         = d.extra          || room.extraR;
-    });
-    if(live.common){
-      const c=live.common;
-      if(c.bookingOpen===false){
-        setTimeout(()=>{
-          document.querySelectorAll('.rc-view-btn,.rc-wa-btn,.action-wa,.hdr-wa')
-            .forEach(b=>{b.disabled=true;b.style.opacity='.4';b.style.cursor='not-allowed';});
-          document.querySelectorAll('.rc-view-btn').forEach(b=>b.textContent='🚫 Booking Closed');
-        },500);
-      }
-    }
-    renderRooms();
-  }catch(e){
-    console.log('Price worker offline — default prices active');
+  const live = await fetchLivePrices();
+  if(live && live.common && live.common.bookingOpen===false){
+    setTimeout(()=>{
+      document.querySelectorAll('.rc-view-btn,.rc-wa-btn,.action-wa,.hdr-wa')
+        .forEach(b=>{b.disabled=true;b.style.opacity='.4';b.style.cursor='not-allowed';});
+      document.querySelectorAll('.rc-view-btn').forEach(b=>b.textContent='🚫 Booking Closed');
+    },500);
   }
+  renderRooms();
 }
 
-// ══ ROOM DATA ══
-const ROOMS = [
-  {
-    id:'double', type:'Super Deluxe Double Bed Room', ratingNum:4.7,
-    mrp:0, discount:0, price:2500, breakfastPrice:170, extraR:500,
-    basePersons:2,
-    cap:'2 Adults · King Double Bed · Super Deluxe',
-    ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🍳 Breakfast Option','🅿️ Parking'],
-    hi:['Super deluxe king double bed','🍳 Breakfast available on request','💑 Couples Welcome — Valid ID required'],
-    imgs:['double-1.jpg','double-2.jpg','double-3.jpg','double-4.jpg','double-5.jpg','double-6.jpg','double-7.jpg','double-8.jpg']
-  },
-  {
-    id:'four', type:'Super Deluxe Four Bed Room', ratingNum:4.6,
-    mrp:0, discount:0, price:3499, breakfastPrice:170, extraR:500,
-    basePersons:4,
-    cap:'4 Adults · 4 Beds · Super Deluxe',
-    ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🛏️ 4 Beds','🅿️ Parking'],
-    hi:['4 beds — ideal for groups & families','Spacious super deluxe room','💑 Couples Welcome — Valid ID required'],
-    imgs:['fourbedroom-1.jpg','fourbedroom-2.jpg','fourbedroom-3.jpg','fourbedroom-4.jpg','fourbedroom-5.jpg','fourbedroom-6.jpg','fourbedroom-7.jpg']
-  },
-  {
-    id:'triple', type:'Super Deluxe Triple Bed Room', ratingNum:4.6,
-    mrp:0, discount:0, price:2999, breakfastPrice:170, extraR:500,
-    basePersons:3,
-    cap:'3 Adults · 3 Beds · Super Deluxe',
-    ams:['❄️ AC','📶 WiFi','📺 Smart TV','🚿 Hot Water','🛏️ 3 Beds','🅿️ Parking'],
-    hi:['3 beds — perfect for family or friends','🍳 Breakfast available on request','💑 Couples Welcome — Valid ID required'],
-    imgs:['tripleroom-1.jpg','tripleroom-2.jpg','tripleroom-3.jpg','tripleroom-4.jpg','tripleroom-5.jpg','tripleroom-6.jpg','tripleroom-7.jpg']
-  },
-  {
-    id:'family', type:'Family Suite — 2 Rooms 1 Set', ratingNum:4.8,
-    mrp:0, discount:0, price:3999, breakfastPrice:170, extraR:500,
-    basePersons:4,
-    cap:'4 Adults · 2 Connecting Rooms',
-    ams:['❄️ AC','📶 WiFi','📺 2 Smart TVs','🚿 Hot Water','🏠 2 Rooms','🅿️ Parking'],
-    hi:['2 connecting rooms as 1 set','🍳 Breakfast available on request','💑 Couples Welcome — Valid ID required'],
-    imgs:['familysuite-1.jpg','familysuite-2.jpg','familysuite-3.jpg','familysuite-4.jpg','familysuite-5.jpg','familysuite-6.jpg','familysuite-7.jpg']
-  },
-];
+
 
 // ══ RENDER HOTEL GALLERY ══
 function renderHotelGallery(){
@@ -819,7 +666,7 @@ function renderRooms(){
   document.getElementById('rooms-grid').innerHTML = ROOMS.map((r,i)=>{
     cSlides[i]=0;
     const sav=r.mrp-r.price;
-    return `<div class="room-card" onclick="openModal(${i})">
+    return `<div class="room-card" onclick="location.href='room.html?id=${r.id}'">
       <div class="rc-img">
         <div class="rc-img-slides" id="rcs-${i}">
           ${r.imgs.map(img=>`<div class="rc-img-slide"><img src="${img}" loading="lazy"/></div>`).join('')}
@@ -845,7 +692,7 @@ function renderRooms(){
             ${r.extraR>0?`<div class="rc-extra">+₹${r.extraR.toLocaleString('en-IN')} extra person</div>`:''}
           </div>
           <div class="rc-btns">
-            <button class="rc-view-btn" onclick="openModal(${i});event.stopPropagation()">View & Book</button>
+            <button class="rc-view-btn" onclick="location.href='room.html?id=${r.id}'">View & Book</button>
             <button class="rc-wa-btn" onclick="quickRoomWA('${r.type}',${r.price},${r.mrp},${r.discount});event.stopPropagation()">💬 WhatsApp</button>
           </div>
         </div>
@@ -856,155 +703,6 @@ function renderRooms(){
 
 function cSlide(i,d,e){e.stopPropagation();const t=document.querySelectorAll('#rcd-'+i+' .rc-dot').length;cSlides[i]=(cSlides[i]+d+t)%t;document.getElementById('rcs-'+i).style.transform=`translateX(-${cSlides[i]*100}%)`;document.querySelectorAll('#rcd-'+i+' .rc-dot').forEach((dot,j)=>dot.classList.toggle('on',j===cSlides[i]));}
 function cGo(i,idx,e){e.stopPropagation();cSlides[i]=idx;document.getElementById('rcs-'+i).style.transform=`translateX(-${idx*100}%)`;document.querySelectorAll('#rcd-'+i+' .rc-dot').forEach((d,j)=>d.classList.toggle('on',j===idx));}
-
-// ══ MODAL ══
-let curRoom=null,mgIdx=0,mgTotal=0;
-const PC={adults:2,nights:1};
-
-function openModal(idx){
-  curRoom=ROOMS[idx];
-  PC.adults=parseInt(curRoom.basePersons)||2;PC.nights=1;
-  document.getElementById('p-adults').textContent=PC.adults;
-  document.getElementById('p-nights').textContent=PC.nights;
-  document.getElementById('cap-note').textContent=curRoom.basePersons+' Adults base · Extra +₹500';
-  const bRow=document.getElementById('bfst-toggle-row');
-  const bChk=document.getElementById('bfst-check');
-  bRow.style.display=curRoom.breakfastPrice?'flex':'none';
-  const bfstLabel=document.getElementById('bfst-price-label');
-  if(bfstLabel) bfstLabel.textContent=curRoom.breakfastPrice||170;
-  bChk.checked=false;
-  const imgs=curRoom.imgs;
-  mgIdx=0;mgTotal=imgs.length;
-  document.getElementById('mg-slides').innerHTML=imgs.map((img,i)=>`<div class="mg-slide" onclick="openRoomLB(${i})" style="cursor:zoom-in"><img src="${img}" style="width:100%;height:100%;object-fit:cover"/></div>`).join('');
-  document.getElementById('mg-dots').innerHTML=imgs.map((_,i)=>`<button class="mg-dot ${i===0?'on':''}" onclick="mgGo(${i})"></button>`).join('');
-  document.getElementById('mg-counter').textContent=`1 / ${mgTotal}`;
-  document.getElementById('mg-slides').style.transform='translateX(0)';
-  document.getElementById('m-type').textContent=curRoom.type;
-  document.getElementById('m-type-top').textContent=curRoom.type;
-  document.getElementById('m-rating').textContent=`⭐ ${curRoom.ratingNum}`;
-  document.getElementById('m-loc').innerHTML=`📍 <b>Hotel Shri Amarnath Lodge · Jammu</b> · ${curRoom.cap}`;
-  document.getElementById('m-mrp').textContent=curRoom.mrp>curRoom.price?'₹'+curRoom.mrp.toLocaleString('en-IN'):'';
-  document.getElementById('m-disc').textContent=curRoom.discount>0?curRoom.discount+'% OFF':'';
-  document.getElementById('m-net').textContent=curRoom.price.toLocaleString('en-IN');
-  
-  document.getElementById('m-ams').innerHTML=curRoom.ams.map(a=>`<span class="rc-am">${a}</span>`).join('');
-  document.getElementById('m-hi').innerHTML=curRoom.hi.map(h=>`<span>${h}</span>`).join('');
-  document.getElementById('extra-tag').textContent='+₹500 per extra person';
-  const t=new Date();
-  const ci=document.getElementById('sb-ci').value||t.toISOString().split('T')[0];
-  const co=document.getElementById('sb-co').value||(()=>{const d=new Date(t);d.setDate(d.getDate()+1);return d.toISOString().split('T')[0]})();
-  document.getElementById('g-ci').value=ci;
-  document.getElementById('g-co').value=co;
-  syncNights();
-  document.getElementById('room-modal').classList.add('open');
-  document.querySelector('#room-modal .modal').scrollTop=0;
-  document.body.style.overflow='hidden';
-  history.pushState({overlay:'modal'},'','#room');
-}
-
-function closeModal(){
-  if(history.state&&history.state.overlay==='modal'){history.back();}
-  else{document.getElementById('room-modal').classList.remove('open');document.body.style.overflow='';}
-}
-document.getElementById('room-modal').addEventListener('click',e=>{if(e.target===document.getElementById('room-modal'))closeModal();});
-
-function mgSlide(d){mgIdx=(mgIdx+d+mgTotal)%mgTotal;updMg();}
-function mgGo(i){mgIdx=i;updMg();}
-
-// swipe support for modal gallery
-(function(){
-  const el=document.getElementById('mg-slides');
-  let sx=0,dx=0,dragging=false;
-  el.addEventListener('touchstart',e=>{dragging=true;dx=0;sx=e.touches[0].clientX;el.style.transition='none';},{passive:true});
-  el.addEventListener('touchmove',e=>{
-    if(!dragging)return;
-    dx=e.touches[0].clientX-sx;
-    el.style.transform=`translateX(calc(-${mgIdx*100}% + ${dx}px))`;
-  },{passive:true});
-  el.addEventListener('touchend',()=>{
-    if(!dragging)return;
-    dragging=false;
-    el.style.transition='';
-    if(dx<-40)mgSlide(1);
-    else if(dx>40)mgSlide(-1);
-    else updMg();
-    dx=0;
-  });
-})();
-function updMg(){
-  document.getElementById('mg-slides').style.transform=`translateX(-${mgIdx*100}%)`;
-  document.querySelectorAll('#mg-dots .mg-dot').forEach((d,i)=>d.classList.toggle('on',i===mgIdx));
-  document.getElementById('mg-counter').textContent=`${mgIdx+1} / ${mgTotal}`;
-}
-
-function pAdj2(k,d){
-  if(k==='adults'){
-    PC.adults=Math.max(1,(PC.adults||1)+d);
-    document.getElementById('p-adults').textContent=PC.adults;
-  } else {
-    PC.nights=Math.max(1,PC.nights+d);
-    document.getElementById('p-nights').textContent=PC.nights;
-    const ci=document.getElementById('g-ci').value;
-    if(ci){const d1=new Date(ci);d1.setDate(d1.getDate()+PC.nights);document.getElementById('g-co').value=d1.toISOString().split('T')[0];}
-  }
-  calcPrice();
-}
-function pAdj(k,d){pAdj2(k,d);}
-
-function syncNights(){
-  const ci=document.getElementById('g-ci').value;
-  const co=document.getElementById('g-co').value;
-  if(ci&&co){
-    const n=Math.max(1,Math.round((new Date(co)-new Date(ci))/(86400000)));
-    PC.nights=n;
-    document.getElementById('p-nights').textContent=n;
-    calcPrice();
-  }
-}
-
-function calcPrice(){
-  if(!curRoom)return;
-  const r=curRoom,n=PC.nights,adults=PC.adults;
-  const bfst=r.breakfastPrice&&document.getElementById('bfst-check').checked;
-  const bfstCost=bfst?r.breakfastPrice*PC.adults*n:0;
-  const extraAdults=Math.max(0,adults-r.basePersons);
-  const exCost=extraAdults*r.extraR*n;
-  const base=r.price*n;
-  const sub=base+bfstCost+exCost;
-  const gst=Math.round(sub*.05);
-  const tot=sub+gst;
-  const ci=document.getElementById('g-ci').value||'TBD';
-  const co=document.getElementById('g-co').value||'TBD';
-  let rows=`
-    <div class="pb-row"><label>Room: ${r.type}</label><span>₹${r.price.toLocaleString('en-IN')}/night</span></div>
-    <div class="pb-row"><label>Check-in → Check-out</label><span>${ci} → ${co}</span></div>
-    <div class="pb-row"><label>Nights</label><span>${n} night${n>1?'s':''}</span></div>
-    <div class="pb-row"><label>Total Guests</label><span>${adults} persons</span></div>`;
-  if(extraAdults>0)rows+=`<div class="pb-row extra"><label>Extra Persons (${extraAdults} × ₹${r.extraR} × ${n}N)</label><span>+₹${exCost.toLocaleString('en-IN')}</span></div>`;
-  if(bfst)rows+=`<div class="pb-row bfst-r"><label>🍳 Breakfast (₹${r.breakfastPrice} × ${adults} persons × ${n}N)</label><span>+₹${bfstCost.toLocaleString('en-IN')}</span></div>`;
-  rows+=`<div class="pb-row"><label>GST 5%</label><span>₹${gst.toLocaleString('en-IN')}</span></div>`;
-  document.getElementById('pb-rows').innerHTML=rows;
-  document.getElementById('pb-total').textContent='₹'+tot.toLocaleString('en-IN');
-}
-
-function sendWA(){
-  const name=document.getElementById('g-name').value.trim();
-  const phone=document.getElementById('g-phone').value.trim();
-  if(!name||!phone){alert('Apna Naam aur WhatsApp Number zaroor bharo.');return;}
-  const r=curRoom;
-  const ci=document.getElementById('g-ci').value||'TBD';
-  const co=document.getElementById('g-co').value||'TBD';
-  const city=document.getElementById('g-city').value.trim()||'—';
-  const note=document.getElementById('g-note').value.trim()||'—';
-  const n=PC.nights,adults=PC.adults;
-  const extraAdults=Math.max(0,adults-r.basePersons);
-  const tot=document.getElementById('pb-total').textContent;
-  const ref='SAL-'+Math.floor(100000+Math.random()*900000);
-  const bfst=r.breakfastPrice&&document.getElementById('bfst-check').checked;
-  const msg=`🛕 *HOTEL SHRI AMARNATH LODGE — ROOM BOOKING*\n━━━━━━━━━━━━━━━━━━━━━\n🔖 *Ref:* ${ref}\n\n👤 *GUEST DETAILS*\n   Name     : ${name}\n   Phone    : ${phone}\n   City     : ${city}\n\n🏨 *ROOM DETAILS*\n   Hotel    : Hotel Shri Amarnath Lodge, Jammu\n   Room     : ${r.type}\n   Price    : *₹${r.price.toLocaleString('en-IN')}/night*\n   Max Persons : ${r.maxPersons}\n   ${bfst?'🍳 Breakfast: Included':''}\n   Check-in : ${ci}\n   Check-out: ${co}\n   Nights   : ${n}\n\n👥 *GUESTS*\n   Total Guests : ${adults} persons\n   ${extraAdults>0?'Extra Persons: '+extraAdults+' × ₹'+r.extraR+'/night':'All within base capacity'}\n\n📝 *Special Request:* ${note}\n\n💰 *TOTAL : ${tot}* (incl. 5% GST)\n━━━━━━━━━━━━━━━━━━━━━\nKindly confirm availability. Thank you! 🙏`;
-  // ← APNA WHATSAPP NUMBER YAHAN DALO (91 ke baad number)
-  window.open('https://wa.me/918899337265?text='+encodeURIComponent(msg),'_blank');
-}
 
 function quickRoomWA(type,price,mrp,disc){
   const msg=`🛕 *Hotel Shri Amarnath Lodge — Room Inquiry*\n\nHello! I want to book:\n*${type}*\nPrice: *₹${price.toLocaleString('en-IN')}/night*\n\nPlease share availability. Thanks! 🙏`;
@@ -1024,26 +722,9 @@ function goPage(page,btn){
 function toggleMob(){document.getElementById('mob-menu').classList.toggle('open');}
 function doSearch(){goPage('hotels',null);}
 
-// ══ ROOM IMAGE LIGHTBOX ══
-let rlbImgs=[], rlbIdx=0;
-function openRoomLB(i){
-  rlbImgs=curRoom?curRoom.imgs:[];
-  rlbIdx=i;
-  document.getElementById('lb-img').src=rlbImgs[i];
-  document.getElementById('lb-lbl').textContent=(i+1)+' / '+rlbImgs.length+' — '+curRoom.type;
-  document.getElementById('lightbox').classList.add('open');
-  history.pushState({overlay:'lightbox'},'','#photo');
-}
-function lbSlideRoom(d){
-  rlbIdx=(rlbIdx+d+rlbImgs.length)%rlbImgs.length;
-  document.getElementById('lb-img').src=rlbImgs[rlbIdx];
-  document.getElementById('lb-lbl').textContent=(rlbIdx+1)+' / '+rlbImgs.length+' — '+curRoom.type;
-}
-
-// ══ LIGHTBOX ══
+// ══ LIGHTBOX (Hotel/Lobby gallery) ══
 let lbIdx=0;
 function openLB(i){
-  rlbImgs=[];
   lbIdx=i;
   document.getElementById('lb-img').src=HOTEL_IMGS[i].src;
   document.getElementById('lb-lbl').textContent=HOTEL_IMGS[i].label+' — '+(i+1)+' / '+HOTEL_IMGS.length;
@@ -1051,18 +732,15 @@ function openLB(i){
   document.body.style.overflow='hidden';
   history.pushState({overlay:'lightbox'},'','#photo');
 }
-function updateLBImg(){
-  document.getElementById('lb-img').src=HOTEL_IMGS[lbIdx].src;
-  document.getElementById('lb-lbl').textContent=HOTEL_IMGS[lbIdx].label+' — '+(lbIdx+1)+' / '+HOTEL_IMGS.length;
-}
 function closeLB(){
   if(history.state&&history.state.overlay==='lightbox'){history.back();}
-  else{document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=document.getElementById('room-modal').classList.contains('open')?'hidden':'';}
+  else{document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 }
 function lbClose(e){if(e.target===document.getElementById('lightbox'))closeLB();}
 function lbSlide(d){
-  if(rlbImgs.length>0){lbSlideRoom(d);}
-  else{lbIdx=(lbIdx+d+HOTEL_IMGS.length)%HOTEL_IMGS.length;updateLBImg();}
+  lbIdx=(lbIdx+d+HOTEL_IMGS.length)%HOTEL_IMGS.length;
+  document.getElementById('lb-img').src=HOTEL_IMGS[lbIdx].src;
+  document.getElementById('lb-lbl').textContent=HOTEL_IMGS[lbIdx].label+' — '+(lbIdx+1)+' / '+HOTEL_IMGS.length;
 }
 
 // swipe support for lightbox
@@ -1081,14 +759,14 @@ function lbSlide(d){
   });
 })();
 
-// close modal/lightbox on phone back button instead of leaving the site
+// close lightbox on phone back button instead of leaving the site
 window.addEventListener('popstate',e=>{
   const st=e.state;
   const lb=document.getElementById('lightbox');
-  const rm=document.getElementById('room-modal');
-  if(!st||st.overlay!=='lightbox'){lb.classList.remove('open');}
-  if(!st||st.overlay!=='modal'){rm.classList.remove('open');}
-  document.body.style.overflow=(lb.classList.contains('open')||rm.classList.contains('open'))?'hidden':'';
+  if(!st||st.overlay!=='lightbox'){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  }
 });
 
 window.addEventListener('DOMContentLoaded',()=>{
