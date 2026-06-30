@@ -4,6 +4,29 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Hotel Shri Amarnath Lodge — Jammu | Book Rooms Online</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Hotel Shri Amarnath Lodge Jammu — Book Super Deluxe rooms online. Best price guaranteed. AC rooms, WiFi, Hot Water, Breakfast available. Call +91 8899337265"/>
+<meta name="keywords" content="Hotel Jammu, Hotel Shri Amarnath Lodge, Jammu hotel booking, cheap hotel Jammu, AC rooms Jammu"/>
+<meta name="author" content="Hotel Shri Amarnath Lodge"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://hotelshriamarnathlodge.com/"/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Hotel Shri Amarnath Lodge — Jammu"/>
+<meta property="og:description" content="Book Super Deluxe rooms online. Best price guaranteed. AC, WiFi, Hot Water, Breakfast."/>
+<meta property="og:url" content="https://hotelshriamarnathlodge.com/"/>
+<meta property="og:type" content="website"/>
+
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -103,7 +126,7 @@ a{text-decoration:none;color:inherit}
 .rc-img{height:200px;position:relative;overflow:hidden;background:#e8f5f2}
 .rc-img-slides{display:flex;height:100%;transition:transform .4s cubic-bezier(.25,.8,.25,1)}
 .rc-img-slide{min-width:100%;height:100%;flex-shrink:0}
-.rc-img-slide img{width:100%;height:100%}
+.rc-img-slide img{width:100%;height:100%;object-fit:cover;object-position:center}
 .rc-img-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:28px;height:28px;border-radius:50%;font-size:.85rem;z-index:3;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
 .room-card:hover .rc-img-arr{opacity:1}
 .rc-img-arr:hover{background:var(--pri)}
@@ -149,15 +172,15 @@ a{text-decoration:none;color:inherit}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);z-index:9000;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-bg.open{opacity:1;pointer-events:all}
 @media(min-width:640px){.modal-bg{align-items:center;padding:20px}}
-.modal{background:var(--white);width:100%;max-width:700px;max-height:92vh;overflow-y:auto;border-radius:20px 20px 0 0;transform:translateY(30px);transition:transform .3s;position:relative;box-shadow:var(--shl)}
-@media(min-width:640px){.modal{border-radius:20px;transform:scale(.95)}}
+.modal{background:var(--white);width:100%;max-width:700px;height:100%;max-height:100vh;max-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:0;transform:translateY(30px);transition:transform .3s;position:relative;box-shadow:var(--shl)}
+@media(min-width:640px){.modal{height:auto;max-height:92vh;border-radius:20px;transform:scale(.95)}}
 .modal-bg.open .modal{transform:translateY(0)}
 @media(min-width:640px){.modal-bg.open .modal{transform:scale(1)}}
-.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 0;display:block}
+.modal-handle{display:none}
 @media(min-width:640px){.modal-handle{display:none}}
 .modal-x{position:absolute;top:14px;right:14px;background:var(--bg);border:none;width:32px;height:32px;border-radius:50%;font-size:.9rem;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--txt3)}
 .modal-x:hover{background:var(--border)}
-.modal-gallery{height:260px;position:relative;overflow:hidden;background:#e8f5f2}
+.modal-gallery{height:42vh;position:relative;overflow:hidden;background:#e8f5f2}
 @media(min-width:640px){.modal-gallery{height:320px}}
 .mg-slides{display:flex;height:100%;transition:transform .4s}
 .mg-slide{min-width:100%;height:100%;flex-shrink:0}
@@ -259,12 +282,12 @@ footer b{color:rgba(255,255,255,.6)}
   .hero{padding:36px 16px 48px}
   .search-bar{flex-direction:column;margin:-24px 0 0}
   .sb-f{width:100%}
-  .rooms-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .rooms-grid{grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px}
   .rc-img{height:150px}
   .rc-body{padding:10px}
   .rc-type{font-size:.82rem}
+  .rc-amt{font-size:1.1rem}
 }
-@media(max-width:400px){.rooms-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -708,7 +731,7 @@ const HOTEL_IMGS = [
 ];
 
 // ══ LIVE PRICE WORKER ══
-const WORKER_URL = 'https://hotel-prices-api.amitkumar300ee.workers.dev';
+const WORKER_URL = 'https://hotel-prices-api.vijayweb2024.workers.dev';
 
 async function loadLivePrices(){
   try{
@@ -871,13 +894,38 @@ function openModal(idx){
   syncNights();
   document.getElementById('room-modal').classList.add('open');
   document.body.style.overflow='hidden';
+  history.pushState({overlay:'modal'},'','#room');
 }
 
-function closeModal(){document.getElementById('room-modal').classList.remove('open');document.body.style.overflow='';}
+function closeModal(){
+  if(history.state&&history.state.overlay==='modal'){history.back();}
+  else{document.getElementById('room-modal').classList.remove('open');document.body.style.overflow='';}
+}
 document.getElementById('room-modal').addEventListener('click',e=>{if(e.target===document.getElementById('room-modal'))closeModal();});
 
 function mgSlide(d){mgIdx=(mgIdx+d+mgTotal)%mgTotal;updMg();}
 function mgGo(i){mgIdx=i;updMg();}
+
+// swipe support for modal gallery
+(function(){
+  const el=document.getElementById('mg-slides');
+  let sx=0,dx=0,dragging=false;
+  el.addEventListener('touchstart',e=>{dragging=true;dx=0;sx=e.touches[0].clientX;el.style.transition='none';},{passive:true});
+  el.addEventListener('touchmove',e=>{
+    if(!dragging)return;
+    dx=e.touches[0].clientX-sx;
+    el.style.transform=`translateX(calc(-${mgIdx*100}% + ${dx}px))`;
+  },{passive:true});
+  el.addEventListener('touchend',()=>{
+    if(!dragging)return;
+    dragging=false;
+    el.style.transition='';
+    if(dx<-40)mgSlide(1);
+    else if(dx>40)mgSlide(-1);
+    else updMg();
+    dx=0;
+  });
+})();
 function updMg(){
   document.getElementById('mg-slides').style.transform=`translateX(-${mgIdx*100}%)`;
   document.querySelectorAll('#mg-dots .mg-dot').forEach((d,i)=>d.classList.toggle('on',i===mgIdx));
@@ -979,6 +1027,7 @@ function openRoomLB(i){
   document.getElementById('lb-img').src=rlbImgs[i];
   document.getElementById('lb-lbl').textContent=(i+1)+' / '+rlbImgs.length+' — '+curRoom.type;
   document.getElementById('lightbox').classList.add('open');
+  history.pushState({overlay:'lightbox'},'','#photo');
 }
 function lbSlideRoom(d){
   rlbIdx=(rlbIdx+d+rlbImgs.length)%rlbImgs.length;
@@ -988,19 +1037,54 @@ function lbSlideRoom(d){
 
 // ══ LIGHTBOX ══
 let lbIdx=0;
-function openLB(i){rlbImgs=[];
+function openLB(i){
+  rlbImgs=[];
   lbIdx=i;
   document.getElementById('lb-img').src=HOTEL_IMGS[i].src;
   document.getElementById('lb-lbl').textContent=HOTEL_IMGS[i].label+' — '+(i+1)+' / '+HOTEL_IMGS.length;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow='hidden';
+  history.pushState({overlay:'lightbox'},'','#photo');
 }
-function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function updateLBImg(){
+  document.getElementById('lb-img').src=HOTEL_IMGS[lbIdx].src;
+  document.getElementById('lb-lbl').textContent=HOTEL_IMGS[lbIdx].label+' — '+(lbIdx+1)+' / '+HOTEL_IMGS.length;
+}
+function closeLB(){
+  if(history.state&&history.state.overlay==='lightbox'){history.back();}
+  else{document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=document.getElementById('room-modal').classList.contains('open')?'hidden':'';}
+}
 function lbClose(e){if(e.target===document.getElementById('lightbox'))closeLB();}
 function lbSlide(d){
   if(rlbImgs.length>0){lbSlideRoom(d);}
-  else{lbIdx=(lbIdx+d+HOTEL_IMGS.length)%HOTEL_IMGS.length;openLB(lbIdx);}
+  else{lbIdx=(lbIdx+d+HOTEL_IMGS.length)%HOTEL_IMGS.length;updateLBImg();}
 }
+
+// swipe support for lightbox
+(function(){
+  const el=document.getElementById('lightbox');
+  let sx=0,sy=0,dragging=false;
+  el.addEventListener('touchstart',e=>{dragging=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(!dragging)return;
+    dragging=false;
+    const dx=e.changedTouches[0].clientX-sx;
+    const dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){
+      if(dx<0)lbSlide(1);else lbSlide(-1);
+    }
+  });
+})();
+
+// close modal/lightbox on phone back button instead of leaving the site
+window.addEventListener('popstate',e=>{
+  const st=e.state;
+  const lb=document.getElementById('lightbox');
+  const rm=document.getElementById('room-modal');
+  if(!st||st.overlay!=='lightbox'){lb.classList.remove('open');}
+  if(!st||st.overlay!=='modal'){rm.classList.remove('open');}
+  document.body.style.overflow=(lb.classList.contains('open')||rm.classList.contains('open'))?'hidden':'';
+});
 
 window.addEventListener('DOMContentLoaded',()=>{
   loadLivePrices();
