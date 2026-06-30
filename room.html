@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title id="pg-title">Room Details — Hotel Shri Amarnath Lodge</title>
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<meta name="description" content="Hotel Shri Amarnath Lodge Jammu — Room details and online booking. Best price guaranteed."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://hotelshriamarnathlodge.com/room.html"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pri:#1a6b5a;--pri2:#14574a;--pri-light:#e8f5f2;
+  --acc:#f97316;--acc-pale:#fff4ed;
+  --dark:#0f1923;--dark2:#1e2d3d;
+  --txt:#1a2332;--txt2:#4a5568;--txt3:#718096;
+  --bg:#f7f9fc;--white:#fff;--border:#e2e8f0;--border2:#f0f4f8;
+  --green:#059669;--red:#dc2626;--gold:#d4a017;
+  --sh:0 1px 3px rgba(0,0,0,.08);--shm:0 4px 16px rgba(0,0,0,.12);--shl:0 16px 48px rgba(0,0,0,.18);
+  --r:12px;--rs:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font-family:'Inter',sans-serif;cursor:pointer}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--pri);border-radius:2px}
+
+/* HEADER */
+.header{background:var(--dark);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ico{width:36px;height:36px;background:linear-gradient(135deg,var(--pri),var(--acc));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.logo-txt{color:#fff;font-size:1rem;font-weight:700;line-height:1}
+.logo-sub{color:rgba(255,255,255,.4);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.nav{display:flex;gap:2px}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.55);padding:8px 14px;border-radius:var(--rs);font-size:.82rem;font-weight:500;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-btn.on{background:var(--pri);color:#fff;font-weight:600}
+.hdr-wa{background:#25D366;color:#fff;border:none;padding:8px 16px;border-radius:var(--rs);font-size:.8rem;font-weight:700;display:flex;align-items:center;gap:6px;transition:all .2s;flex-shrink:0}
+.hdr-wa:hover{background:#1fbb5c}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px}
+.hamburger span{width:22px;height:2px;background:rgba(255,255,255,.8);border-radius:2px;transition:all .3s;display:block}
+.mob-menu{display:none;background:var(--dark2);border-top:1px solid rgba(255,255,255,.08);padding:12px 20px;flex-direction:column;gap:4px}
+.mob-menu.open{display:flex}
+.mob-nav-btn{background:none;border:none;color:rgba(255,255,255,.65);padding:10px 14px;border-radius:var(--rs);font-size:.88rem;font-weight:500;text-align:left;transition:all .2s;width:100%}
+.mob-nav-btn:hover,.mob-nav-btn.on{background:var(--pri);color:#fff}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--dark) 0%,#1a3a2e 50%,var(--dark) 100%);padding:48px 20px 60px;position:relative;overflow:hidden}
+
+.hero-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:#fca16a;padding:5px 14px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;font-family:"Playfair Display",serif;letter-spacing:-.5px}
+.hero h1 span{color:#fca16a}
+.hero-sub{color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.7;margin-bottom:32px;font-weight:300}
+
+/* SEARCH BAR */
+.search-bar-wrap{background:var(--bg);padding:0 16px}
+.search-bar{background:#fff;border-radius:16px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;box-shadow:0 4px 24px rgba(0,0,0,.10);border:1px solid #e8e8e8;max-width:900px;margin:-32px auto 0;position:relative;z-index:10}
+.sb-f{flex:1;min-width:140px}
+.sb-f label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:5px}
+.sb-inp{width:100%;background:#f5f5f5;border:1px solid #ddd;border-radius:var(--rs);padding:9px 12px;font-family:'Inter',sans-serif;font-size:.85rem;color:#222;outline:none;transition:border-color .2s}
+.sb-inp:focus{border-color:var(--pri)}
+.sb-inp option{background:var(--dark2);color:#fff}
+.sb-go{background:var(--pri);color:#fff;border:none;border-radius:var(--rs);padding:9px 22px;font-size:.85rem;font-weight:700;white-space:nowrap;transition:all .2s;height:39px}
+.sb-go:hover{background:var(--pri2);transform:translateY(-1px)}
+
+/* PAGE SECTIONS */
+.page{display:none;max-width:1280px;margin:0 auto;padding:28px 20px 60px}
+.page.on{display:block}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
+.sec-hd-l .ey{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pri);margin-bottom:4px}
+.sec-hd-l h2{font-size:1.4rem;font-weight:800;color:var(--txt)}
+.sec-hd-l h2 span{color:var(--acc)}
+.count-badge{background:var(--pri-light);color:var(--pri);padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:700}
+
+/* HOTEL GALLERY */
+.hgal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:32px;border-radius:var(--r);overflow:hidden}
+@media(max-width:768px){.hgal-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.hgal-grid{grid-template-columns:repeat(2,1fr)}}
+.hgal-slot{position:relative;height:180px;background:#e8f5f2;overflow:hidden;border-radius:var(--rs);cursor:pointer}
+@media(max-width:640px){.hgal-slot{height:120px}}
+.hgal-slot img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.hgal-slot:hover img{transform:scale(1.06)}
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.open{opacity:1;pointer-events:all}
+.lb-img{max-width:95vw;max-height:88vh;object-fit:contain;border-radius:var(--rs)}
+.lightbox-x{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700}
+.lightbox-x:hover{background:rgba(255,255,255,.3)}
+.lightbox-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-arr:hover{background:var(--pri)}
+.lb-al{left:12px}.lb-ar{right:12px}
+.lb-lbl{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;background:rgba(0,0,0,.5);padding:4px 16px;border-radius:20px;white-space:nowrap}
+.hgal-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent);color:#fff;font-size:.62rem;font-weight:700;padding:20px 8px 6px;letter-spacing:.5px}
+
+/* ROOM CARDS */
+.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.room-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;cursor:pointer;transition:all .3s;box-shadow:var(--sh)}
+.room-card:hover{transform:translateY(-4px);box-shadow:var(--shm);border-color:rgba(26,107,90,.25)}
+
+/* card image */
+.rc-img{height:200px;position:relative;overflow:hidden;background:#e8f5f2}
+.rc-img-slides{display:flex;height:100%;transition:transform .4s cubic-bezier(.25,.8,.25,1)}
+.rc-img-slide{min-width:100%;height:100%;flex-shrink:0}
+.rc-img-slide img{width:100%;height:100%;object-fit:cover;object-position:center}
+.rc-img-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:28px;height:28px;border-radius:50%;font-size:.85rem;z-index:3;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
+.room-card:hover .rc-img-arr{opacity:1}
+.rc-img-arr:hover{background:var(--pri)}
+.rc-arr-l{left:8px}.rc-arr-r{right:8px}
+.rc-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:3}
+.rc-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);border:none;padding:0;cursor:pointer;transition:all .2s}
+.rc-dot.on{background:#fff;width:14px;border-radius:3px}
+.rc-top-badges{position:absolute;top:10px;left:10px;z-index:3;display:flex;flex-direction:column;gap:4px}
+.rc-badge{padding:3px 10px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.rc-badge.deal{background:var(--green);color:#fff}
+.rc-like{position:absolute;top:10px;right:10px;z-index:3;background:rgba(255,255,255,.85);border:none;width:30px;height:30px;border-radius:50%;font-size:.88rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.rc-like:hover{transform:scale(1.1);background:#fff}
+.rc-like.on{background:var(--acc-pale)}
+.rc-img-count{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;padding:3px 8px;border-radius:5px;font-size:.65rem;font-weight:700;z-index:3}
+
+/* card body */
+.rc-body{padding:14px}
+.rc-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.rc-type{font-size:.95rem;font-weight:700;color:var(--txt)}
+.rc-rating{display:flex;align-items:center;gap:4px;background:var(--pri-light);color:var(--pri);padding:3px 8px;border-radius:5px;font-size:.72rem;font-weight:700;flex-shrink:0}
+.rc-cap{font-size:.75rem;color:var(--txt3);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:4px}
+.rc-cap .cap-pill{background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:600;color:var(--txt2)}
+.rc-ams{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.rc-am{background:var(--bg);border:1px solid var(--border);padding:3px 8px;border-radius:5px;font-size:.68rem;font-weight:600;color:var(--txt2)}
+.rc-hi{background:var(--pri-light);border-radius:var(--rs);padding:7px 10px;margin-bottom:10px;display:flex;flex-direction:column;gap:3px}
+.rc-hi span{font-size:.71rem;color:var(--pri);font-weight:600;display:flex;align-items:center;gap:5px}
+.rc-hi span::before{content:'✓';font-weight:900}
+.rc-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px;border-top:1px solid var(--border2)}
+.rc-mrp{font-size:.68rem;color:var(--txt3);text-decoration:line-through;margin-bottom:1px}
+.rc-disc{font-size:.62rem;color:var(--green);font-weight:800;margin-bottom:1px}
+.rc-amt{font-size:1.35rem;font-weight:800;color:var(--txt);line-height:1}
+.rc-amt .sym{font-size:.75rem;vertical-align:super;font-weight:600;color:var(--txt3)}
+.rc-per{font-size:.62rem;color:var(--txt3)}
+.rc-extra{font-size:.62rem;color:var(--acc);font-weight:700;margin-top:1px}
+.rc-bfst{font-size:.62rem;color:var(--pri);font-weight:700;margin-top:2px;background:var(--pri-light);padding:2px 6px;border-radius:4px;display:inline-block}
+.rc-btns{display:flex;flex-direction:column;gap:5px}
+.rc-view-btn{background:var(--pri);color:#fff;border:none;border-radius:var(--rs);padding:8px 16px;font-size:.78rem;font-weight:700;transition:all .2s;white-space:nowrap}
+.rc-view-btn:hover{background:var(--pri2)}
+.rc-wa-btn{background:#fff;color:#25D366;border:1.5px solid #25D366;border-radius:var(--rs);padding:7px 12px;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .2s}
+.rc-wa-btn:hover{background:#25D366;color:#fff}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:var(--white);z-index:9000;display:none;align-items:stretch;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);width:100%;max-width:100%;height:100%;max-height:100vh;max-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:0;position:relative;box-shadow:none}
+.modal-body{max-width:760px;margin:0 auto}
+.modal-handle{display:none}
+.modal-topbar{position:sticky;top:0;z-index:10;background:var(--white);display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.modal-back{background:var(--bg);border:none;width:38px;height:38px;border-radius:50%;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt);flex-shrink:0;font-weight:700}
+.modal-back:hover{background:var(--border)}
+.modal-topbar-title{font-size:1.05rem;font-weight:800;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-gallery{height:42vh;position:relative;overflow:hidden;background:#e8f5f2}
+@media(min-width:640px){.modal-gallery{height:320px}}
+.mg-slides{display:flex;height:100%;transition:transform .4s}
+.mg-slide{min-width:100%;height:100%;flex-shrink:0}
+.mg-slide img{width:100%;height:100%;object-fit:cover}
+.mg-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:1rem;z-index:3;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mg-arrow:hover{background:var(--pri)}
+.mg-al{left:10px}.mg-ar{right:10px}
+.mg-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+.mg-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);border:none;padding:0;cursor:pointer;transition:all .2s}
+.mg-dot.on{background:#fff;width:16px;border-radius:3px}
+.mg-counter{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.5);color:#fff;padding:3px 10px;border-radius:5px;font-size:.72rem;font-weight:700}
+.modal-body{padding:18px 20px}
+@media(min-width:640px){.modal-body{padding:22px 28px}}
+.mb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.mb-type{font-size:1.35rem;font-weight:800;color:var(--txt)}
+.mb-rating{background:var(--pri);color:#fff;padding:4px 10px;border-radius:7px;font-size:.85rem;font-weight:800;flex-shrink:0}
+.mb-loc{font-size:.88rem;color:var(--txt3);margin-bottom:12px}
+.mb-price-strip{background:linear-gradient(135deg,var(--pri),var(--pri2));border-radius:var(--rs);padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.mb-mrp-row{display:flex;align-items:center;gap:8px}
+.mb-mrp{font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:line-through}
+.mb-disc-badge{background:rgba(255,255,255,.2);color:#fff;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:800}
+.mb-net-price{font-size:1.6rem;font-weight:800;color:#fff}
+.mb-net-price .sym{font-size:.85rem;vertical-align:super;font-weight:600}
+.mb-per{font-size:.65rem;color:rgba(255,255,255,.5)}
+.modal-body .rc-am{font-size:.78rem;padding:4px 10px}
+.modal-body .rc-hi span{font-size:.8rem}
+.modal-body .cap-pill{font-size:.78rem;padding:4px 10px}
+.person-section{background:var(--bg);border-radius:var(--r);padding:14px;margin-bottom:14px;border:1px solid var(--border)}
+.ps-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt3);margin-bottom:12px}
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:480px){.ps-grid{grid-template-columns:repeat(3,1fr)}}
+.ps-item{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:10px;text-align:center}
+.ps-label{font-size:.75rem;font-weight:700;color:var(--txt);margin-bottom:1px}
+.ps-sub{font-size:.62rem;color:var(--txt3);margin-bottom:8px;line-height:1.3}
+.ps-counter{display:flex;align-items:center;justify-content:center;gap:6px}
+.ps-btn{background:var(--bg);border:1.5px solid var(--border);width:26px;height:26px;border-radius:6px;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--txt)}
+.ps-btn:hover{border-color:var(--pri);color:var(--pri)}
+.ps-num{font-size:.9rem;font-weight:800;color:var(--txt);width:24px;text-align:center}
+.ps-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.6rem;font-weight:700;margin-top:5px}
+.ps-tag.free{background:#ecfdf5;color:var(--green)}
+.ps-tag.charge{background:var(--acc-pale);color:var(--acc)}
+.bfst-row{background:#fff8f0;border:1.5px solid #fed7aa;border-radius:var(--rs);padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.bfst-row label{font-size:.82rem;font-weight:700;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:8px;width:100%}
+.bfst-row input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:var(--acc)}
+.price-box{background:linear-gradient(135deg,#0f1923,#1a2d3d);border-radius:var(--r);padding:16px;margin-bottom:14px;border:1px solid rgba(255,255,255,.08)}
+.pb-rows{margin-bottom:12px}
+.pb-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.78rem}
+.pb-row:last-child{border-bottom:none}
+.pb-row label{color:rgba(255,255,255,.45);font-weight:500}
+.pb-row span{color:#fff;font-weight:700;text-align:right}
+.pb-row.extra span{color:#fb923c}
+.pb-row.free span{color:var(--green)}
+.pb-row.bfst-r span{color:#fbbf24}
+.pb-total{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--pri),var(--pri2));border-radius:var(--rs);padding:14px 16px;margin-top:4px;box-shadow:0 4px 12px rgba(26,107,90,.3)}
+.pb-total-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.75)}
+.pb-total-amt{font-size:1.9rem;font-weight:800;color:#fff;letter-spacing:-.5px}
+.guest-info{margin-bottom:14px}
+.gi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.gi-f label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3);display:block;margin-bottom:4px}
+.gi-f input{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--txt);outline:none;background:var(--bg);transition:all .2s}
+.gi-f input:focus{border-color:var(--pri);background:var(--white);box-shadow:0 0 0 3px rgba(26,107,90,.07)}
+.modal-actions{display:flex;flex-direction:column;gap:8px}
+.action-wa{background:#25D366;color:#fff;border:none;border-radius:var(--r);padding:14px;font-size:.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.action-wa:hover{background:#1fbb5c}
+.action-call{background:var(--dark);color:#fff;border:none;border-radius:var(--r);padding:12px;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s}
+.action-call:hover{background:var(--dark2)}
+.wa-note{font-size:.7rem;color:var(--txt3);text-align:center;margin-top:6px;line-height:1.5}
+
+/* CONTACT PAGE */
+.contact-wrap{max-width:600px;margin:0 auto}
+.contact-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:24px;box-shadow:var(--sh);margin-bottom:16px}
+.cc-title{font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:14px}
+.cc-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:var(--rs);margin-bottom:8px;cursor:pointer;transition:background .2s}
+.cc-item:hover{background:var(--pri-light)}
+.cc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cc-ico.wa{background:#25D366}
+.cc-ico.ph{background:var(--pri)}
+.cc-ico.em{background:var(--acc)}
+.cc-lbl{font-size:.72rem;color:var(--txt3)}
+.cc-val{font-size:.88rem;font-weight:700;color:var(--txt)}
+.wa-float{position:fixed;bottom:24px;right:20px;z-index:888;background:#25D366;color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);cursor:pointer;animation:wap 2.5s infinite}
+@keyframes wap{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.5)}50%{box-shadow:0 4px 24px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.08)}}
+.trust{background:linear-gradient(135deg,#0f1923 0%,#1a3a2e 100%);padding:32px 20px;margin-top:40px;border-top:1px solid rgba(255,255,255,.06)}
+.trust-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:640px){.trust-inner{grid-template-columns:repeat(4,1fr);gap:16px}}
+.ti{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 12px;transition:all .3s}
+.ti:hover{background:rgba(255,255,255,.08);border-color:rgba(26,107,90,.5)}
+.ti-ico{font-size:1.4rem;margin-bottom:6px}
+.ti-n{font-size:1.5rem;font-weight:800;color:#fff;line-height:1}
+.ti-l{font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:.5px;margin-top:5px;text-transform:uppercase}
+footer{background:#0a1018;padding:24px 20px;color:rgba(255,255,255,.3);font-size:.75rem;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+footer b{color:rgba(255,255,255,.6)}
+.footer-inner{max-width:700px;margin:0 auto}
+.footer-links{display:flex;justify-content:center;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,.4);font-size:.72rem;font-weight:600;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--pri)}
+
+@media(max-width:640px){
+  .nav{display:none}
+  .hamburger{display:flex}
+  .hdr-wa{padding:7px 12px;font-size:.75rem}
+  .hero{padding:36px 16px 48px}
+  .search-bar{flex-direction:column;margin:-24px 0 0}
+  .sb-f{width:100%}
+  .rooms-grid{grid-template-columns:1fr;gap:16px}
+  .rc-img{height:200px}
+  .rc-body{padding:14px}
+  .rc-type{font-size:.95rem}
+  .rc-amt{font-size:1.35rem}
+}
+</style>
+
+/* ROOM PAGE SPECIFIC — full page, no overlay/backdrop */
+html,body{height:100%}
+body{display:flex;flex-direction:column;min-height:100vh}
+.room-page-body{flex:1;width:100%;max-width:760px;margin:0 auto;padding:18px 20px 40px}
+@media(min-width:640px){.room-page-body{padding:22px 28px 50px}}
+.rp-gallery{height:42vh;position:relative;overflow:hidden;background:#e8f5f2}
+@media(min-width:640px){.rp-gallery{height:380px}}
+.loading-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh;color:var(--txt3);font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div class="modal-topbar">
+  <button class="modal-back" onclick="goBack()">←</button>
+  <div class="modal-topbar-title" id="m-type-top">Room Details</div>
+</div>
+
+<div id="room-content" style="display:none">
+  <div class="modal-gallery rp-gallery">
+    <div class="mg-slides" id="mg-slides"></div>
+    <button class="mg-arrow mg-al" onclick="mgSlide(-1)">‹</button>
+    <button class="mg-arrow mg-ar" onclick="mgSlide(1)">›</button>
+    <div class="mg-dots" id="mg-dots"></div>
+    <div class="mg-counter" id="mg-counter">1 / 8</div>
+  </div>
+  <div class="room-page-body">
+    <div class="mb-top">
+      <div class="mb-type" id="m-type">Room Type</div>
+      <div class="mb-rating" id="m-rating">⭐ 4.7</div>
+    </div>
+    <div class="mb-loc" id="m-loc">📍 Hotel Shri Amarnath Lodge · Jammu</div>
+    <div class="mb-price-strip">
+      <div>
+        <div class="mb-mrp-row">
+          <span class="mb-mrp" id="m-mrp">₹0</span>
+          <span class="mb-disc-badge" id="m-disc">0% OFF</span>
+        </div>
+        <div style="color:rgba(255,255,255,.55);font-size:.65rem;margin-bottom:2px">Net Price / Night</div>
+        <div class="mb-net-price"><span class="sym">₹</span><span id="m-net">0</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="mb-per">per room / night</div>
+      </div>
+    </div>
+    <div class="rc-ams" id="m-ams" style="margin-bottom:12px"></div>
+    <div class="rc-hi" id="m-hi" style="margin-bottom:14px"></div>
+
+    <div class="bfst-row" id="bfst-toggle-row" style="display:none">
+      <label><input type="checkbox" id="bfst-check" onchange="calcPrice()"/>🍳 Add Breakfast (+₹<span id="bfst-price-label">170</span>/per person)</label>
+    </div>
+
+    <div class="person-section">
+      <div class="ps-title">👥 Select Guests & Nights</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="ps-item">
+          <div class="ps-label">👤 Total Adults</div>
+          <div class="ps-sub" id="cap-note" style="color:var(--acc);font-weight:600">Max — persons</div>
+          <div class="ps-counter">
+            <button class="ps-btn" onclick="pAdj2('adults',-1)">−</button>
+            <div class="ps-num" id="p-adults">2</div>
+            <button class="ps-btn" onclick="pAdj2('adults',1)">+</button>
+          </div>
+          <div class="ps-tag charge" id="extra-tag">+₹500/extra person</div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-label">🌙 Nights</div>
+          <div class="ps-sub">Auto from<br/>check-in/out</div>
+          <div class="ps-counter">
+            <button class="ps-btn" onclick="pAdj2('nights',-1)">−</button>
+            <div class="ps-num" id="p-nights">1</div>
+            <button class="ps-btn" onclick="pAdj2('nights',1)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-box">
+      <div class="pb-rows" id="pb-rows"><div class="pb-row"><label>Select guests above</label><span>—</span></div></div>
+      <div class="pb-total">
+        <div class="pb-total-label">Total Payable</div>
+        <div class="pb-total-amt" id="pb-total">₹0</div>
+      </div>
+    </div>
+
+    <div class="guest-info">
+      <div class="gi-row">
+        <div class="gi-f"><label>Your Name *</label><input type="text" id="g-name" placeholder="Full name"/></div>
+        <div class="gi-f"><label>WhatsApp Number *</label><input type="tel" id="g-phone" placeholder="Your WhatsApp number"/></div>
+        <div class="gi-f"><label>Check-in Date</label><input type="date" id="g-ci" oninput="syncNights()"/></div>
+        <div class="gi-f"><label>Check-out Date</label><input type="date" id="g-co" oninput="syncNights()"/></div>
+        <div class="gi-f"><label>City / State</label><input type="text" id="g-city" placeholder="Delhi, Mumbai..."/></div>
+        <div class="gi-f"><label>Special Request</label><input type="text" id="g-note" placeholder="Any request..."/></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="action-wa" onclick="sendWA()">💬 Send Booking on WhatsApp</button>
+      <button class="action-call" onclick="window.open('tel:+918899337265')">📞 Call Now</button>
+    </div>
+    <div class="wa-note">Room details, guests, dates & price breakdown will be sent as WhatsApp message to Hotel Shri Amarnath Lodge.</div>
+  </div>
+</div>
+
+<div class="loading-wrap" id="loading-wrap">Loading room details…</div>
+
+<script src="room-data.js"></script>
+<script>
+let curRoom=null, mgIdx=0, mgTotal=0;
+const PC={adults:2,nights:1};
+
+function goBack(){
+  if(document.referrer && document.referrer.indexOf(location.host)!==-1){ history.back(); }
+  else{ location.href='hotel-latest.html'; }
+}
+
+function getRoomFromURL(){
+  const params=new URLSearchParams(location.search);
+  const id=params.get('id');
+  return ROOMS.find(r=>r.id===id) || ROOMS[0];
+}
+
+function renderRoom(){
+  curRoom=getRoomFromURL();
+  PC.adults=parseInt(curRoom.basePersons)||2; PC.nights=1;
+  document.getElementById('pg-title').textContent=curRoom.type+' — Hotel Shri Amarnath Lodge';
+  document.getElementById('m-type-top').textContent=curRoom.type;
+  document.getElementById('m-type').textContent=curRoom.type;
+  document.getElementById('m-rating').textContent=`⭐ ${curRoom.ratingNum}`;
+  document.getElementById('m-loc').innerHTML=`📍 <b>Hotel Shri Amarnath Lodge · Jammu</b> · ${curRoom.cap}`;
+  document.getElementById('m-mrp').textContent=curRoom.mrp>curRoom.price?'₹'+curRoom.mrp.toLocaleString('en-IN'):'';
+  document.getElementById('m-disc').textContent=curRoom.discount>0?curRoom.discount+'% OFF':'';
+  document.getElementById('m-net').textContent=curRoom.price.toLocaleString('en-IN');
+  document.getElementById('m-ams').innerHTML=curRoom.ams.map(a=>`<span class="rc-am">${a}</span>`).join('');
+  document.getElementById('m-hi').innerHTML=curRoom.hi.map(h=>`<span>${h}</span>`).join('');
+  document.getElementById('p-adults').textContent=PC.adults;
+  document.getElementById('p-nights').textContent=PC.nights;
+  document.getElementById('cap-note').textContent=curRoom.basePersons+' Adults base · Extra +₹500';
+  document.getElementById('extra-tag').textContent='+₹500 per extra person';
+  const bRow=document.getElementById('bfst-toggle-row');
+  const bChk=document.getElementById('bfst-check');
+  bRow.style.display=curRoom.breakfastPrice?'flex':'none';
+  const bfstLabel=document.getElementById('bfst-price-label');
+  if(bfstLabel) bfstLabel.textContent=curRoom.breakfastPrice||170;
+  bChk.checked=false;
+
+  const imgs=curRoom.imgs;
+  mgIdx=0; mgTotal=imgs.length;
+  document.getElementById('mg-slides').innerHTML=imgs.map((img,i)=>`<div class="mg-slide" onclick="openRoomLB(${i})" style="cursor:zoom-in"><img src="${img}" style="width:100%;height:100%;object-fit:cover"/></div>`).join('');
+  document.getElementById('mg-dots').innerHTML=imgs.map((_,i)=>`<button class="mg-dot ${i===0?'on':''}" onclick="mgGo(${i})"></button>`).join('');
+  document.getElementById('mg-counter').textContent=`1 / ${mgTotal}`;
+  document.getElementById('mg-slides').style.transform='translateX(0)';
+
+  const t=new Date();
+  document.getElementById('g-ci').value=t.toISOString().split('T')[0];
+  const tm=new Date(t); tm.setDate(t.getDate()+1);
+  document.getElementById('g-co').value=tm.toISOString().split('T')[0];
+  syncNights();
+
+  document.getElementById('loading-wrap').style.display='none';
+  document.getElementById('room-content').style.display='block';
+}
+
+function mgSlide(d){mgIdx=(mgIdx+d+mgTotal)%mgTotal;updMg();}
+function mgGo(i){mgIdx=i;updMg();}
+function updMg(){
+  document.getElementById('mg-slides').style.transform=`translateX(-${mgIdx*100}%)`;
+  document.querySelectorAll('#mg-dots .mg-dot').forEach((d,i)=>d.classList.toggle('on',i===mgIdx));
+  document.getElementById('mg-counter').textContent=`${mgIdx+1} / ${mgTotal}`;
+}
+(function(){
+  document.addEventListener('DOMContentLoaded',()=>{
+    const el=document.getElementById('mg-slides');
+    let sx=0,dx=0,dragging=false;
+    el.addEventListener('touchstart',e=>{dragging=true;dx=0;sx=e.touches[0].clientX;el.style.transition='none';},{passive:true});
+    el.addEventListener('touchmove',e=>{
+      if(!dragging)return;
+      dx=e.touches[0].clientX-sx;
+      el.style.transform=`translateX(calc(-${mgIdx*100}% + ${dx}px))`;
+    },{passive:true});
+    el.addEventListener('touchend',()=>{
+      if(!dragging)return;
+      dragging=false;
+      el.style.transition='';
+      if(dx<-40)mgSlide(1);
+      else if(dx>40)mgSlide(-1);
+      else updMg();
+      dx=0;
+    });
+  });
+})();
+
+function pAdj2(k,d){
+  if(k==='adults'){
+    PC.adults=Math.max(1,(PC.adults||1)+d);
+    document.getElementById('p-adults').textContent=PC.adults;
+  } else {
+    PC.nights=Math.max(1,PC.nights+d);
+    document.getElementById('p-nights').textContent=PC.nights;
+    const ci=document.getElementById('g-ci').value;
+    if(ci){const d1=new Date(ci);d1.setDate(d1.getDate()+PC.nights);document.getElementById('g-co').value=d1.toISOString().split('T')[0];}
+  }
+  calcPrice();
+}
+
+function syncNights(){
+  const ci=document.getElementById('g-ci').value;
+  const co=document.getElementById('g-co').value;
+  if(ci&&co){
+    const n=Math.max(1,Math.round((new Date(co)-new Date(ci))/(86400000)));
+    PC.nights=n;
+    document.getElementById('p-nights').textContent=n;
+    calcPrice();
+  }
+}
+
+function calcPrice(){
+  if(!curRoom)return;
+  const r=curRoom,n=PC.nights,adults=PC.adults;
+  const bfst=r.breakfastPrice&&document.getElementById('bfst-check').checked;
+  const bfstCost=bfst?r.breakfastPrice*PC.adults*n:0;
+  const extraAdults=Math.max(0,adults-r.basePersons);
+  const exCost=extraAdults*r.extraR*n;
+  const base=r.price*n;
+  const sub=base+bfstCost+exCost;
+  const gst=Math.round(sub*.05);
+  const tot=sub+gst;
+  const ci=document.getElementById('g-ci').value||'TBD';
+  const co=document.getElementById('g-co').value||'TBD';
+  let rows=`
+    <div class="pb-row"><label>Room: ${r.type}</label><span>₹${r.price.toLocaleString('en-IN')}/night</span></div>
+    <div class="pb-row"><label>Check-in → Check-out</label><span>${ci} → ${co}</span></div>
+    <div class="pb-row"><label>Nights</label><span>${n} night${n>1?'s':''}</span></div>
+    <div class="pb-row"><label>Total Guests</label><span>${adults} persons</span></div>`;
+  if(extraAdults>0)rows+=`<div class="pb-row extra"><label>Extra Persons (${extraAdults} × ₹${r.extraR} × ${n}N)</label><span>+₹${exCost.toLocaleString('en-IN')}</span></div>`;
+  if(bfst)rows+=`<div class="pb-row bfst-r"><label>🍳 Breakfast (₹${r.breakfastPrice} × ${adults} persons × ${n}N)</label><span>+₹${bfstCost.toLocaleString('en-IN')}</span></div>`;
+  rows+=`<div class="pb-row"><label>GST 5%</label><span>₹${gst.toLocaleString('en-IN')}</span></div>`;
+  document.getElementById('pb-rows').innerHTML=rows;
+  document.getElementById('pb-total').textContent='₹'+tot.toLocaleString('en-IN');
+}
+
+function sendWA(){
+  const name=document.getElementById('g-name').value.trim();
+  const phone=document.getElementById('g-phone').value.trim();
+  if(!name||!phone){alert('Apna Naam aur WhatsApp Number zaroor bharo.');return;}
+  const r=curRoom;
+  const ci=document.getElementById('g-ci').value||'TBD';
+  const co=document.getElementById('g-co').value||'TBD';
+  const city=document.getElementById('g-city').value.trim()||'—';
+  const note=document.getElementById('g-note').value.trim()||'—';
+  const n=PC.nights,adults=PC.adults;
+  const extraAdults=Math.max(0,adults-r.basePersons);
+  const tot=document.getElementById('pb-total').textContent;
+  const ref='SAL-'+Math.floor(100000+Math.random()*900000);
+  const bfst=r.breakfastPrice&&document.getElementById('bfst-check').checked;
+  const msg=`🛕 *HOTEL SHRI AMARNATH LODGE — ROOM BOOKING*\n━━━━━━━━━━━━━━━━━━━━━\n🔖 *Ref:* ${ref}\n\n👤 *GUEST DETAILS*\n   Name     : ${name}\n   Phone    : ${phone}\n   City     : ${city}\n\n🏨 *ROOM DETAILS*\n   Hotel    : Hotel Shri Amarnath Lodge, Jammu\n   Room     : ${r.type}\n   Price    : *₹${r.price.toLocaleString('en-IN')}/night*\n   Max Persons : ${r.maxPersons||r.basePersons}\n   ${bfst?'🍳 Breakfast: Included':''}\n   Check-in : ${ci}\n   Check-out: ${co}\n   Nights   : ${n}\n\n👥 *GUESTS*\n   Total Guests : ${adults} persons\n   ${extraAdults>0?'Extra Persons: '+extraAdults+' × ₹'+r.extraR+'/night':'All within base capacity'}\n\n📝 *Special Request:* ${note}\n\n💰 *TOTAL : ${tot}* (incl. 5% GST)\n━━━━━━━━━━━━━━━━━━━━━\nKindly confirm availability. Thank you! 🙏`;
+  window.open('https://wa.me/918899337265?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ══ IMAGE ZOOM LIGHTBOX ══
+let rlbIdx=0;
+function openRoomLB(i){
+  rlbIdx=i;
+  document.getElementById('lb-img').src=curRoom.imgs[i];
+  document.getElementById('lb-lbl').textContent=(i+1)+' / '+curRoom.imgs.length+' — '+curRoom.type;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lbClose(e){if(e.target===document.getElementById('lightbox'))closeLB();}
+function lbSlide(d){
+  rlbIdx=(rlbIdx+d+curRoom.imgs.length)%curRoom.imgs.length;
+  document.getElementById('lb-img').src=curRoom.imgs[rlbIdx];
+  document.getElementById('lb-lbl').textContent=(rlbIdx+1)+' / '+curRoom.imgs.length+' — '+curRoom.type;
+}
+(function(){
+  document.addEventListener('DOMContentLoaded',()=>{
+    const el=document.getElementById('lightbox');
+    let sx=0,sy=0,dragging=false;
+    el.addEventListener('touchstart',e=>{dragging=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    el.addEventListener('touchend',e=>{
+      if(!dragging)return;
+      dragging=false;
+      const dx=e.changedTouches[0].clientX-sx;
+      const dy=e.changedTouches[0].clientY-sy;
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){ if(dx<0)lbSlide(1);else lbSlide(-1); }
+    });
+  });
+})();
+
+// init
+renderRoom();
+fetchLivePrices().then(()=>{ renderRoom(); });
+</script>
+
+<div class="lightbox" id="lightbox" onclick="lbClose(event)">
+  <button class="lightbox-x" onclick="closeLB()">✕</button>
+  <button class="lightbox-arr lb-al" onclick="lbSlide(-1);event.stopPropagation()">‹</button>
+  <img class="lb-img" id="lb-img" src="" alt=""/>
+  <button class="lightbox-arr lb-ar" onclick="lbSlide(1);event.stopPropagation()">›</button>
+  <div class="lb-lbl" id="lb-lbl"></div>
+</div>
+
+</body>
+</html>
